@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SCAME.Controllers
 {
-    ER=[Authorize(Roles ="Administrador")] //se colocara que tiene acceso al controladore
+    [Authorize(Roles ="Administrador")] //se colocara que tiene acceso al controladore
     public class RolesController : Controller
     {
 
