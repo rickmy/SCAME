@@ -1,0 +1,17 @@
+<svg width="46.809" height="51.732" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text stroke="#000" transform="matrix(0.4986252188682556,0,0,0.3957807719707489,56.765026001259685,28.653208704199642) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_13" y="42.335509" x="27.855718" stroke-width="0" fill="#000000">SCAME</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_14" y="45.140386" x="7" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">SCAME</text>
+  <rect stroke="null" id="svg_22" height="32.195117" width="0" y="1.481855" x="20.782548" stroke-opacity="null" stroke-width="9" fill="#28a5df"/>
+  <rect stroke="null" id="svg_23" height="32" width="7.926828" y="-0.103509" x="19.441085" fill-opacity="null" stroke-opacity="null" stroke-width="9" fill="#28a5df"/>
+  <rect stroke="null" id="svg_24" height="7" width="33" y="13" x="6.9045" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#28a5df"/>
+  <text stroke="#000000" transform="matrix(7.249719120287515,0,0,4.29585866900055,-64.54641034859671,-60.72905926137525) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_29" y="21.481854" x="8.831331" stroke-width="0" fill="none">S</text>
+  <text style="cursor: move;" transform="matrix(7.122762010967031,0,0,4.35911501983847,-97.97152181772138,-66.65511539459432) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_31" y="22.579414" x="13.709379" stroke-width="0" fill="#ffffff">S</text>
+ </g>
+</svg>

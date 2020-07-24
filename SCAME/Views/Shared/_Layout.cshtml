@@ -6,44 +6,138 @@
     <title>@ViewData["Title"] - SCAME</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/components.css">
+    <link rel="stylesheet" href="~/css/icons.css">
+    <link rel="stylesheet" href="~/css/responsee.css">
+    <link rel="stylesheet" href="~/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" href="~/css/lightcase.css">
+    <!-- CUSTOM STYLE -->
+    <link rel="stylesheet" href="~/css/template-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+    <script type="text/javascript" src="~/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery-ui.min.js"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SCAME</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation" value="hola">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
-                        </li>
+<body class="size-1280">
+    <header role="banner" class="position-relative">
+        <nav class=" background-primary-dott  sticky">
+            <div class="top-nav">
+                <!-- mobile version logo -->
+                <div class="logo hide-l hide-xl hide-xxl">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/logo.svg" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/logo-dark.svg" alt="">
+                    </a>
+                </div>
+
+                <div class="top-nav left-menu">
+
+                    <ul class="right top-ul chevron">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a></li>
+                        <li><a>Otros Servicios</a></li>
                     </ul>
+                </div>
+
+                <!-- logo -->
+                <ul class="logo-menu">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
+                        <!-- Logo White Version -->
+                        <img class="logo-white" src="img/logo.svg" alt="">
+                        <!-- Logo Dark Version -->
+                        <img class="logo-dark" src="img/logo-dark.svg" alt="">
+                    </a>
+                </ul>
+
+                <!-- right menu items -->
+                <div class="top-nav right-menu">
+
+                    <ul class="top-ul chevron">
+                        <li>
+                            <a>Especialidades</a>
+                            <ul>
+                                <li><a>Medicina General</a></li>
+                                <li><a>Pediatría</a></li>
+                            </ul>
+                        </li>
+                        <partial name="_LoginPartial" />
+                    </ul>
+                    
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <main>
+        @RenderBody()
+    </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - SCAME - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+
+    <footer>
+        <!-- Social -->
+        <div class="background-primary padding text-center">
+            <a href="/"><i class="icon-facebook_circle text-size-25 text-dark"></i></a>
+            <a href="/"><i class="icon-twitter_circle text-size-25 text-dark"></i></a>
+            <a href="/"><i class="icon-google_plus_circle text-size-25 text-dark"></i></a>
+            <a href="/"><i class="icon-instagram_circle text-size-25 text-dark"></i></a>
+            <a href="/"><i class="icon-linked_in_circle text-size-25 text-dark"></i></a>
         </div>
+        <!-- Main Footer -->
+        <section class="section background-dark">
+            <div class="line">
+                <div class="margin2x">
+                    <div class="s-12 m-6 l-3 xl-5">
+                        <h4 class="text-white text-strong">Nuestra Misión</h4>
+                        <p>
+                            Mejorar la calidad de vida, ofreciendo la ayuda para agendar servicios medicos, de forma eficiente, sostenible y responsable.
+                        </p>
+                    </div>
+                    <div class="s-12 m-6 l-3 xl-2">
+                        <h4 class="text-white text-strong margin-m-top-30">Useful Links</h4>
+                        <a class="text-primary-hover" href="page.html">FAQ</a><br>
+                        <a class="text-primary-hover" href="contact.html">Contact Us</a><br>
+                        <a class="text-primary-hover" href="blog.html">Blog</a>
+                    </div>
+                    <div class="s-12 m-6 l-3 xl-2">
+                        <h4 class="text-white text-strong margin-m-top-30">Terminos de Uso</h4>
+                        <a class="text-primary-hover" asp-area="" asp-controller="Home" asp-action="Privacy">Terms and Conditions</a><br>
+                        <a class="text-primary-hover" href="page.html">Refund Policy</a><br>
+                        <a class="text-primary-hover" href="page.html">Disclaimer</a>
+                    </div>
+                     <div class="s-12 m-6 l-3 xl-3">
+               <h4 class="text-white text-strong margin-m-top-30">Contactos</h4>
+                <p><i class="icon-sli-screen-smartphone text-primary"></i>(+593) 0992563584</p>
+                <a class="text-primary-hover" href="mailto:contact@sampledomain.com"><i class="icon-sli-mouse text-primary"></i> contact@example.com</a><br>
+                <a class="text-primary-hover" href="mailto:office@sampledomain.com"><i class="icon-sli-mouse text-primary"></i> office@example.com</a>
+            </div>
+          </div>  
+        </div>    
+      </section>
+      <div class="background-dark">
+         <div class="line">
+            <hr class="break margin-top-bottom-0" style="border-color: #777;">
+         </div>
+      </div>
+      <!-- Bottom Footer -->
+      <section class="padding-2x background-dark full-width">
+        <div class="line">
+          <div class="s-12 l-6">
+            <p class="text-size-12">Copyright 2019, Vision Design - graphic zoo</p>
+            <p class="text-size-12">All images have been purchased from Bigstock. Do not use the images in your website.</p>
+          </div>
+          <div class="s-12 l-6">
+            <a class="right text-size-12 text-primary-hover" href="http://www.myresponsee.com" title="Responsee - lightweight responsive framework">Design and coding<br> by Responsee Team</a>
+          </div>
+        </div>  
+      </section>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="js/responsee.js"></script>
+    <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="js/template-scripts.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
