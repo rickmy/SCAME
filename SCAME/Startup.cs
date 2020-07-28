@@ -29,19 +29,20 @@ namespace SCAME
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddAuthentication()
-            //    .AddGoogle(options => {
-            //        options.ClientId = Configuration["App:GoogleClientId"];
-            //        options.ClientSecret = Configuration["App:GoogleClientSecret"];
-            //    })
-            //    .AddFacebook(options =>
-            //    {
-            //        options.ClientId = Configuration["App:FacebookClientId"];
-            //        options.ClientSecret = Configuration["App:FacebookClientSecret"];
-            //    });
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = Configuration["App:GoogleClientId"];
+                    options.ClientSecret = Configuration["App:GoogleClientSecret"];
+                })
+                .AddFacebook(options =>
+                {
+                    options.ClientId = Configuration["App:FacebookClientId"];
+                    options.ClientSecret = Configuration["App:FacebookClientSecret"];
+                });
 
-            //services.AddTransient<IEmailSender, EmailSender>();
-            //services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -78,6 +79,14 @@ namespace SCAME
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            //app.UseMvc(routes =>
+            //{
+            //routes.MapRoute(
+            //    name:"areas",
+            //    pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
+            //)
+            //});
         }
     }
 }

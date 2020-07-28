@@ -1,4 +1,2 @@
-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
-
-contraseña de antohny
-BF&CKml4xkSZ
+api key de sendgrid
+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
