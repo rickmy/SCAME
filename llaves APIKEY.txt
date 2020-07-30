@@ -1,2 +1,1 @@
-api key de sendgrid
-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
+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

@@ -1,0 +1,82 @@
+﻿@model SCAME.Models.Consultorio
+
+@{
+    ViewData["Title"] = "Create";
+}
+    <div class="col-md-12">
+        <br />
+        <h1>Registro del consultorio</h1>
+        <h4>Ingrese todo la información solicitada:</h4>
+        
+        <hr />
+
+        <form asp-action="Create">
+            <div class="form-row">
+                <div class="col-md-3 mb-3">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Ruc" class="control-label"></label>
+                        <input asp-for="Ruc" class="form-control" />
+                        <span asp-validation-for="Ruc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <div class="form-group">
+                        <label asp-for="NombreConsultorio" class="control-label">Nombre Consultorio</label>
+                        <input asp-for="NombreConsultorio" class="form-control" />
+                        <span asp-validation-for="NombreConsultorio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row ">
+                <div class="form-group col-md-3 mb-3">
+                    <label asp-for="CedulaRepresentanteLegal" class="control-label">Cédula del representate legal</label>
+                    <input asp-for="CedulaRepresentanteLegal" class="form-control" />
+                    <span asp-validation-for="CedulaRepresentanteLegal" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label asp-for="NombreRepresentateLegal" class="control-label">Nombres del representate legal</label>
+                    <input asp-for="NombreRepresentateLegal" class="form-control" />
+                    <span asp-validation-for="NombreRepresentateLegal" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label asp-for="ApellidoRepresentanteLegal" class="control-label">Apellidos del representate legal</label>
+                    <input asp-for="ApellidoRepresentanteLegal" class="form-control" />
+                    <span asp-validation-for="ApellidoRepresentanteLegal" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-3">
+                    <label asp-for="Direccion" class="control-label">Dirección</label>
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5 mb-3">
+                    <label asp-for="NumPatenteMunicipal" class="control-label">Número de patente municipal</label>
+                    <input asp-for="NumPatenteMunicipal" class="form-control" />
+                    <span asp-validation-for="NumPatenteMunicipal" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-5 mb-3">
+                    <label asp-for="PermisoFuncionamientoMsp" class="control-label">Número del permiso de funcionamiento otrogado por MSP</label>
+                    <input asp-for="PermisoFuncionamientoMsp" class="form-control" />
+                    <span asp-validation-for="PermisoFuncionamientoMsp" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2 mb-3">
+                    <input type="submit" value="Enviar" class="btn btn-primary" />
+                </div>
+                <div class="form-group col-md-8 mb-3"> </div>
+                <div class="form-group col-md-2 mb-3">
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">Regresar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

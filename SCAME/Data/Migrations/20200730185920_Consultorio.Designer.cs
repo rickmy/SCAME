@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SCAME.Data;
 
 namespace SCAME.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200730185920_Consultorio")]
+    partial class Consultorio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,6 +246,9 @@ namespace SCAME.Data.Migrations
                     b.Property<string>("ApellidoRepresentanteLegal")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AspNetUser")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int?>("CantonId")
                         .HasColumnType("int");
 
@@ -251,9 +256,6 @@ namespace SCAME.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NombreConsultorio")
@@ -271,17 +273,11 @@ namespace SCAME.Data.Migrations
                     b.Property<string>("Ruc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CantonId");
+                    b.HasIndex("AspNetUser");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CantonId");
 
                     b.ToTable("Consultorio");
                 });
@@ -366,13 +362,13 @@ namespace SCAME.Data.Migrations
 
             modelBuilder.Entity("SCAME.Models.Consultorio", b =>
                 {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("AspNetUser");
+
                     b.HasOne("SCAME.Models.Canton", "Canton")
                         .WithMany()
                         .HasForeignKey("CantonId");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1843,4 +1843,75 @@ a.tab-label.active-btn {
   .padding-3x {
     padding: 30px !important;
   }
-} 
+  }
+    .card {
+        border: none;
+        border-radius: 0;
+        width: 420px !important;
+        margin: 0 auto
+    }
+
+    .signup {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        padding: 10px 50px
+    }
+
+    a {
+        text-decoration: none !important
+    }
+
+    h5 {
+        color: #017cff;
+        margin-bottom: 3px;
+        font-weight: bold
+    }
+
+    small {
+        color: rgba(0, 0, 0, 0.3)
+    }
+
+
+
+    .form-control {
+        border: 1px solid #017cff;
+        border-radius: 30px;
+        background-color: rgba(0, 0, 0, .075);
+        letter-spacing: 1px
+    }
+
+        .form-control:focus {
+            border: 0.5px solid #017cff;
+            border-radius: 30px;
+            box-shadow: none;
+            background-color: rgba(0, 0, 0, .075);
+            color: #000;
+            letter-spacing: 1px
+        }
+
+    .btn {
+        display: block;
+        width: 100%;
+        border-radius: 30px;
+        border: none;
+    }
+
+    .text-left {
+        color: rgba(0, 0, 0, 0.3);
+        font-weight: 400
+    }
+
+    .text-right {
+        color: #ff0147;
+        font-weight: bold
+    }
+
+    span.text-center {
+        color: rgba(0, 0, 0, 0.3)
+    }
+
+    .fab {
+        padding: 15px;
+        font-size: 23px
+    }

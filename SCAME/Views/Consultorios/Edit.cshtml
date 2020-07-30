@@ -1,0 +1,69 @@
+﻿@model SCAME.Models.Consultorio
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Consultorio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Ruc" class="control-label"></label>
+                <input asp-for="Ruc" class="form-control" />
+                <span asp-validation-for="Ruc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreConsultorio" class="control-label"></label>
+                <input asp-for="NombreConsultorio" class="form-control" />
+                <span asp-validation-for="NombreConsultorio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CedulaRepresentanteLegal" class="control-label"></label>
+                <input asp-for="CedulaRepresentanteLegal" class="form-control" />
+                <span asp-validation-for="CedulaRepresentanteLegal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreRepresentateLegal" class="control-label"></label>
+                <input asp-for="NombreRepresentateLegal" class="form-control" />
+                <span asp-validation-for="NombreRepresentateLegal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApellidoRepresentanteLegal" class="control-label"></label>
+                <input asp-for="ApellidoRepresentanteLegal" class="form-control" />
+                <span asp-validation-for="ApellidoRepresentanteLegal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumPatenteMunicipal" class="control-label"></label>
+                <input asp-for="NumPatenteMunicipal" class="form-control" />
+                <span asp-validation-for="NumPatenteMunicipal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermisoFuncionamientoMsp" class="control-label"></label>
+                <input asp-for="PermisoFuncionamientoMsp" class="form-control" />
+                <span asp-validation-for="PermisoFuncionamientoMsp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

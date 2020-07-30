@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SCAME.Models.Consultorio>
+
+@{
+    ViewData["Title"] = "Consultorios";
+}
+    <br /><br /><br />
+<h1 class="h1 text-center ">Administrador de Consultorios</h1>
+<br />
+<div class="col-md-12">
+    <table class="table table-responsive-sm table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">
+                    Ruc
+                </th>
+                <th>
+                    Consultorio
+                </th>
+                <th>
+                    Cedula del representante
+                </th>
+                <th>
+                    Nombre del representante
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </th>
+                <th>
+                    Patente Municipal
+                </th>
+                <th>
+                    Permiso de funcionamiento
+                </th>
+                <th>
+                    Id Usuario
+                </th>
+                <th>
+                    Correo
+                </th>
+                <th>
+                    Telefono
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ruc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreConsultorio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CedulaRepresentanteLegal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreRepresentateLegal)
+                    @Html.DisplayFor(modelItem => item.ApellidoRepresentanteLegal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumPatenteMunicipal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermisoFuncionamientoMsp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
