@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SCAME.Data;
 
 namespace SCAME.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200731125626_Citas")]
+    partial class Citas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -350,21 +352,6 @@ namespace SCAME.Data.Migrations
                     b.ToTable("Consultorio");
                 });
 
-            modelBuilder.Entity("SCAME.Models.Especialidad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NombreEspecialidad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Especialidad");
-                });
-
             modelBuilder.Entity("SCAME.Models.Especialista", b =>
                 {
                     b.Property<int>("Id")
@@ -372,28 +359,10 @@ namespace SCAME.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Cedula")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CodigoSenecyt")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PrimerApellido")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrimerNombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SegundoApellido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SegundoNombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TituloEgresado")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

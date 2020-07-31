@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SCAME.Models.Especialidad>
+
+@{
+    ViewData["Title"] = "Especilidades";
+}
+    <div class="col-md-12 padding ">
+        <h1 class="h1 text-center text-strong ">Administrador de <small>Especialidades</small></h1>
+        <br />
+        <p>
+            <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Crear Especialidad</a>
+        </p>
+        <table class="table table-responsive-sm table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreEspecialidad)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreEspecialidad)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Ediart</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SCAME.Data;
 
 namespace SCAME.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200731125420_Cita")]
+    partial class Cita
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,70 +236,6 @@ namespace SCAME.Data.Migrations
                     b.ToTable("Canton");
                 });
 
-            modelBuilder.Entity("SCAME.Models.Cita", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ConsultorioId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Dia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EspecialistaId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("HorarioId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModalidadEscojida")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ModalidadId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreConsultorio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PacienteId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PrimerApellido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrimerNombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ConsultorioId");
-
-                    b.HasIndex("EspecialistaId");
-
-                    b.HasIndex("HorarioId");
-
-                    b.HasIndex("ModalidadId");
-
-                    b.HasIndex("PacienteId");
-
-                    b.ToTable("Cita");
-                });
-
             modelBuilder.Entity("SCAME.Models.Consultorio", b =>
                 {
                     b.Property<int>("Id")
@@ -348,93 +286,6 @@ namespace SCAME.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Consultorio");
-                });
-
-            modelBuilder.Entity("SCAME.Models.Especialidad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NombreEspecialidad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Especialidad");
-                });
-
-            modelBuilder.Entity("SCAME.Models.Especialista", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Cedula")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CodigoSenecyt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrimerApellido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrimerNombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SegundoApellido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SegundoNombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TituloEgresado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Especialista");
-                });
-
-            modelBuilder.Entity("SCAME.Models.Horario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Dia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Disponibilidad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Horario");
-                });
-
-            modelBuilder.Entity("SCAME.Models.Modalidad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Modalidad");
                 });
 
             modelBuilder.Entity("SCAME.Models.Paciente", b =>
@@ -513,29 +364,6 @@ namespace SCAME.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SCAME.Models.Cita", b =>
-                {
-                    b.HasOne("SCAME.Models.Consultorio", "Consultorio")
-                        .WithMany()
-                        .HasForeignKey("ConsultorioId");
-
-                    b.HasOne("SCAME.Models.Especialista", "Especialista")
-                        .WithMany()
-                        .HasForeignKey("EspecialistaId");
-
-                    b.HasOne("SCAME.Models.Horario", "Horario")
-                        .WithMany()
-                        .HasForeignKey("HorarioId");
-
-                    b.HasOne("SCAME.Models.Modalidad", "Modalidad")
-                        .WithMany()
-                        .HasForeignKey("ModalidadId");
-
-                    b.HasOne("SCAME.Models.Paciente", "Paciente")
-                        .WithMany()
-                        .HasForeignKey("PacienteId");
                 });
 
             modelBuilder.Entity("SCAME.Models.Consultorio", b =>

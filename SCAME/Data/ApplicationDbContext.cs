@@ -22,5 +22,11 @@ namespace SCAME.Data
         {
             throw new NotImplementedException();
         }
+
+        public DbSet<SCAME.Models.Cita> Cita { get; set; }
+
+        public DbSet<SCAME.Models.Especialista> Especialista { get; set; }
+
+        public DbSet<SCAME.Models.Especialidad> Especialidad { get; set; }
     }
 }
