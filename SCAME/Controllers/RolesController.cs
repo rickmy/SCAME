@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SCAME.Controllers
 {
-    //[Authorize(Roles ="Administrador")] //se colocara que tiene acceso al controladore
+    [Authorize(Roles ="Administrador")] //se colocara que tiene acceso al controladore
     public class RolesController : Controller
     {
 
@@ -20,6 +20,35 @@ namespace SCAME.Controllers
         {
             this.roleManager = roleManager;
             this.userManager = userMgr;
+        }
+        private async Task createRolesandUsers()
+        {
+
+            bool rol = await roleManager.RoleExistsAsync("Administrador");
+            if (!rol)
+            {
+
+                // Creacion del rol Administrador 
+                var role = new IdentityRole();
+                role.Name = "Administrador";
+                await roleManager.CreateAsync(role);
+
+                //Aqui creamos al usuario administrador el que mantendra el webapp    
+
+                var user = new IdentityUser();
+                user.UserName = "default";
+                user.Email = "default@default.com";
+
+                string userPWD = "scamerayñ2020.";
+
+                IdentityResult chkUser = await userManager.CreateAsync(user, userPWD);
+
+                //Se añdira un usuario con rol administrador por defecto  
+                if (chkUser.Succeeded)
+                {
+                    var result1 = await userManager.AddToRoleAsync(user, "Adminstrador");
+                }
+            }
         }
 
         //para mostrar todos los elementos

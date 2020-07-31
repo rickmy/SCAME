@@ -1,30 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @model IEnumerable<IdentityRole>
+    <br /><br />
+<h1 class="h1 text-center text-strong">Administrador de Roles</h1>
+<br />
+<div class="col-md-12">
 
-<h1>Todos los Roles</h1>
+    <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Crear rol</a>
 
-<a asp-action="Create" class="btn btn-secondary">Crear rol</a>
-
-<table class="table table-sm table-bordered">
-    <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Usuarios</th>
-        <th>Actualizar</th>
-        <th>Borrar</th>
-    </tr>
-    @foreach (var rol in Model)
-    {
-        <tr>
-            <td>@rol.Id</td>
-            <td>@rol.Name</td>
-            <td i-rol="@rol.Id"></td>
-            <td><a asp-action="Update" asp-route-id="@rol.Id" class="btn btn-primary">Actualizar</a></td>
-            <td>
-                <form asp-action="Delete" method="post" asp-route-id="@rol.Id">
-                    <input type="submit" value="Eliminar" class="btn btn-danger" />
-                </form>
-            </td>
-        </tr>
-    }
-</table>
+    <table class="table table-responsive-sm table-hover ">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th>Nombre</th>
+                <th>Usuarios</th>
+                <th>Actualizar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        @foreach (var rol in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@rol.Id</td>
+                    <td>@rol.Name</td>
+                    <td i-rol="@rol.Id"></td>
+                    <td><a asp-action="Update" asp-route-id="@rol.Id" class="btn btn-primary text-white">Actualizar</a></td>
+                    <td>
+                        <form asp-action="Delete" method="post" asp-route-id="@rol.Id">
+                            <input type="submit" value="Eliminar" class="btn btn-danger text-white" />
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

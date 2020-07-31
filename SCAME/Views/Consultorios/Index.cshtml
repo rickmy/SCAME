@@ -3,13 +3,16 @@
 @{
     ViewData["Title"] = "Consultorios";
 }
-    <br /><br /><br />
-<h1 class="h1 text-center ">Administrador de Consultorios</h1>
+    <br /><br />
+<h1 class="h1 text-center text-strong ">Administrador de Consultorios</h1>
 <br />
 <div class="col-md-12">
     <table class="table table-responsive-sm table-hover">
         <thead class="thead-dark">
             <tr>
+                <th>
+                    Id Usuario
+                </th>
                 <th scope="col">
                     Ruc
                 </th>
@@ -32,9 +35,6 @@
                     Permiso de funcionamiento
                 </th>
                 <th>
-                    Id Usuario
-                </th>
-                <th>
                     Correo
                 </th>
                 <th>
@@ -49,6 +49,9 @@
             @foreach (var item in Model)
             {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Ruc)
                 </td>
@@ -70,9 +73,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PermisoFuncionamientoMsp)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
