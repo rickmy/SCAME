@@ -19,5 +19,6 @@ namespace SCAME.Models
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
 
+
     }
 }

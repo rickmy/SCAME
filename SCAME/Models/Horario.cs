@@ -7,6 +7,9 @@ namespace SCAME.Models
         public int Id { get; set; }
         public string Dia { get; set; }
         public DateTime Fecha { get; set; }
-        public string Disponibilidad { get; set; }
+        public DateTime HoraApertura { get; set; }
+        public DateTime HoraCierre { get; set; }
+        public bool Estado { get; set; } = true;
+
     }
 }

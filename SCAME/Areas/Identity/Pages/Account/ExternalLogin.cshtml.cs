@@ -126,7 +126,7 @@ namespace SCAME.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    var result1 = await _userManager.AddToRoleAsync(user, "usuario");
+                    var result1 = await _userManager.AddToRoleAsync(user, "Usuario");
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {

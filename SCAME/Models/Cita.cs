@@ -14,13 +14,11 @@ namespace SCAME.Models
         public Horario Horario { get; set; }
         public string PrimerNombre { get; set; }
         public string PrimerApellido { get; set; }
-        public Especialista Especialista { get; set; }
+        public Medico Especialista { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public Paciente Paciente { get; set; }
         public string Descripcion { get; set; }
-        public string ModalidadEscojida { get; set; }
-        public Modalidad Modalidad { get; set; }
         public string NombreConsultorio { get; set; }
         public Consultorio Consultorio { get; set; }
 

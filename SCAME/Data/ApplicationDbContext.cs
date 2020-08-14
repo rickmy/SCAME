@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -25,7 +23,7 @@ namespace SCAME.Data
 
         public DbSet<SCAME.Models.Cita> Cita { get; set; }
 
-        public DbSet<SCAME.Models.Especialista> Especialista { get; set; }
+        public DbSet<SCAME.Models.Medico> Especialista { get; set; }
 
         public DbSet<SCAME.Models.Especialidad> Especialidad { get; set; }
     }

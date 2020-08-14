@@ -46,7 +46,7 @@ namespace SCAME.Controllers
                 //Se añdira un usuario con rol administrador por defecto  
                 if (chkUser.Succeeded)
                 {
-                    var result1 = await userManager.AddToRoleAsync(user, "Adminstrador");
+                    var result1 = await userManager.AddToRoleAsync(user, "Administrador");
                 }
             }
         }

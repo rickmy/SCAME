@@ -47,7 +47,7 @@ namespace SCAME.Controllers
 
             return View(consultorio);
         }
-        [Authorize(Roles = "usuario, Administrador")]
+        [Authorize(Roles = "Usuario, Administrador")]
         // GET: Consultorios/Create
         public IActionResult Create()
         {
@@ -57,7 +57,7 @@ namespace SCAME.Controllers
         // POST: Consultorios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "usuario, Administrador")]
+        [Authorize(Roles = "Usuario, Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Required] string Ruc, string NombreConsultorio, string CedulaRepresentanteLegal, string NombreRepresentateLegal, string ApellidoRepresentanteLegal, string Direccion, string NumPatenteMunicipal, string PermisoFuncionamientoMsp)
@@ -79,7 +79,7 @@ namespace SCAME.Controllers
                     consultorio.Email = await userManager.GetEmailAsync(user);
                     consultorio.Telefono = await userManager.GetPhoneNumberAsync(user);
                 }
-                var eliminarRol = await userManager.RemoveFromRoleAsync(user, "usuario");
+                var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
                 var result1 = await userManager.AddToRoleAsync(user, "Consultorio");
                 _context.Add(consultorio);
                 await _context.SaveChangesAsync();
