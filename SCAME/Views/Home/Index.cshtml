@@ -117,28 +117,32 @@
 </div>
                     <div class="col-md-12">
                     </div>
-                                        <section class="full-reset text-center" style="padding: 40px 0;">
-                                            <article class="tile">
-                                                <div class="tile-icon full-reset background-grey"><i class="icon-users background-primary-dott"></i></div>
-                                                <div class="tile-num full-reset background-dark text-white">Usuarios no verificados</div>
-                                            </article>
-                                            <a class="tile" asp-controller="Pacientes" asp-action="Index">
-                                                <div class="tile-icon full-reset background-grey"><i class="icon-user"></i></div>
-                                                <div class="tile-num full-reset background-dark text-white">Pacientes</div>
-                                            </a>
-                                            <a class="tile" asp-controller="Consultorios" asp-action="Index">
-                                                <div class="tile-icon full-reset background-grey"><i class="icon-home"></i></div>
-                                                <div class="tile-num full-reset background-dark text-white">Consultorios</div>
-                                            </a>
-                                            <a class="tile" asp-controller="Roles" asp-action="Index">
-                                                <div class="tile-icon full-reset background-grey"><i class="icon-reload"></i></div>
-                                                <div class="tile-num full-reset background-dark text-white">Roles</div>
-                                            </a>
-                                            <a class="tile" asp-controller="Especialidades" asp-action="Index">
-                                                <div class="tile-icon full-reset background-grey"><i class="icon-information_black"></i></div>
-                                                <div class="tile-num full-reset background-dark text-white">Especialidades</div>
-                                            </a>
-                                        </section>
+                    <section class="full-reset text-center" style="padding: 40px 0;">
+                        <a class="tile" asp-controller="Usuarios" asp-action="Index">
+                            <div class="tile-icon full-reset background-grey"><i class="icon-users background-primary-dott"></i></div>
+                            <div class="tile-num full-reset background-dark text-white">Usuarios no verificados</div>
+                        </a>
+                        <a class="tile" asp-controller="Pacientes" asp-action="Index">
+                            <div class="tile-icon full-reset background-grey"><i class="icon-user"></i></div>
+                            <div class="tile-num full-reset background-dark text-white">Pacientes</div>
+                        </a>
+                        <a class="tile" asp-controller="Consultorios" asp-action="Index">
+                            <div class="tile-icon full-reset background-grey"><i class="icon-home"></i></div>
+                            <div class="tile-num full-reset background-dark text-white">Consultorios</div>
+                        </a>
+                        <a class="tile" asp-controller="Roles" asp-action="Index">
+                            <div class="tile-icon full-reset background-grey"><i class="icon-reload"></i></div>
+                            <div class="tile-num full-reset background-dark text-white">Roles</div>
+                        </a>
+                        <a class="tile" asp-controller="Especialidades" asp-action="Index">
+                            <div class="tile-icon full-reset background-grey"><i class="icon-information_black"></i></div>
+                            <div class="tile-num full-reset background-dark text-white">Especialidades</div>
+                        </a>
+                        <a class="tile" asp-controller="Paises" asp-action="Index">
+                            <div class="tile-icon full-reset background-grey"><i class="icon-information_black"></i></div>
+                            <div class="tile-num full-reset background-dark text-white">Pais/Provincia/Ciudad</div>
+                        </a>
+                    </section>
 }
                                 @if (User.IsInRole("Consultorio"))
                                 {
@@ -197,8 +201,9 @@
                         </div>
                     </div>
                     <br /><br /><br /><br /><br /><br /><br />
-                </section>}
-                                                @if (User.IsInRole("usuario"))
+                </section>
+                                }
+                                                @if (User.IsInRole("Usuario"))
                                                 {
                                                     Body();
                                                 }}

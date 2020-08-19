@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SCAME.Models
 {
@@ -8,5 +9,16 @@ namespace SCAME.Models
         public int Id { get; set; }
         public string NombrePais { get; set; }
         public bool Estado { get; set; } = true;
+        List<Provincia> Provincias { get; set; } = new List<Provincia>();
+
+
+        public void AñadirProvincia(Provincia provincia)
+        {
+            this.Provincias.Add(provincia);
+        }
+
+        
     }
+
+
 }

@@ -11,5 +11,7 @@ namespace SCAME.Models
         public DateTime HoraCierre { get; set; }
         public bool Estado { get; set; } = true;
 
+
+
     }
 }

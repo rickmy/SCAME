@@ -20,8 +20,7 @@ namespace SCAME.Models
         public string Direccion { get; set; }
         public string NumPatenteMunicipal { get; set; }
         public string PermisoFuncionamientoMsp { get; set; }
-        public int HorarioId { get; set; }
-        public Horario Horario { get; set; }
+        public List<Horario> Horarios { get; set; } = new List<Horario>();
         public int CantonId { get; set; }
         public Canton Canton { get; set; }
         public string UserId { get; set; }

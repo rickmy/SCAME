@@ -23,6 +23,9 @@ namespace SCAME.Controllers
             _context = context;
             this.userManager = userMgr;
         }
+
+
+
         [Authorize(Roles = "Administrador")]
         // GET: Consultorios
         public async Task<IActionResult> Index()
@@ -51,6 +54,21 @@ namespace SCAME.Controllers
         // GET: Consultorios/Create
         public IActionResult Create()
         {
+            List<Canton> ciudades = _context.Canton.ToList();
+            List<SelectListItem> items = ciudades.ConvertAll(d =>
+            {
+                return new SelectListItem()
+                {
+                    Text = d.NombreCanton.ToString(),
+                    Value = d.Id.ToString(),
+                    
+                    Selected = false
+                };
+
+            });
+
+            ViewBag.items = items;
+
             return View();
         }
 
@@ -60,7 +78,7 @@ namespace SCAME.Controllers
         [Authorize(Roles = "Usuario, Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Required] string Ruc, string NombreConsultorio, string CedulaRepresentanteLegal, string NombreRepresentateLegal, string ApellidoRepresentanteLegal, string Direccion, string NumPatenteMunicipal, string PermisoFuncionamientoMsp)
+        public async Task<IActionResult> Create([Required] string Ruc, string NombreConsultorio, string CedulaRepresentanteLegal, string NombreRepresentateLegal, string ApellidoRepresentanteLegal, string Direccion, string NumPatenteMunicipal, string PermisoFuncionamientoMsp, int CantonId)
         {
             var user = await userManager.GetUserAsync(User);
             if (ModelState.IsValid)
@@ -75,18 +93,29 @@ namespace SCAME.Controllers
                     consultorio.Direccion = Direccion;
                     consultorio.PermisoFuncionamientoMsp = PermisoFuncionamientoMsp;
                     consultorio.NumPatenteMunicipal = NumPatenteMunicipal;
+                    consultorio.CantonId = CantonId;
                     consultorio.UserId = await userManager.GetUserIdAsync(user);
                     consultorio.Email = await userManager.GetEmailAsync(user);
                     consultorio.Telefono = await userManager.GetPhoneNumberAsync(user);
                 }
-                var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
-                var result1 = await userManager.AddToRoleAsync(user, "Consultorio");
-                _context.Add(consultorio);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if(consultorio != null)
+                {
+                    var userRol = await userManager.IsInRoleAsync(user, "Usuario");
+                    if (userRol == true)
+                    {
+                        var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
+                        var result1 = await userManager.AddToRoleAsync(user, "Consultorio");
+                        _context.Add(consultorio);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
             return View();
         }
+
+        
+
         [Authorize(Roles = "Consultorio")]
         // GET: Consultorios/Edit/5
         public async Task<IActionResult> Edit(int? id)
