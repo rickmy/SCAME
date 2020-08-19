@@ -10,8 +10,8 @@ using SCAME.Data;
 namespace SCAME.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200818220024_Ciudades")]
-    partial class Ciudades
+    [Migration("20200819043512_Inicio")]
+    partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -388,9 +388,6 @@ namespace SCAME.Migrations
 
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("HoraApertura")
                         .HasColumnType("datetime2");

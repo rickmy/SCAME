@@ -81,23 +81,6 @@ namespace SCAME.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Horario",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Dia = table.Column<string>(nullable: true),
-                    Fecha = table.Column<DateTime>(nullable: false),
-                    HoraApertura = table.Column<DateTime>(nullable: false),
-                    HoraCierre = table.Column<DateTime>(nullable: false),
-                    Estado = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Horario", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Paciente",
                 columns: table => new
                 {
@@ -290,7 +273,6 @@ namespace SCAME.Migrations
                     Direccion = table.Column<string>(nullable: true),
                     NumPatenteMunicipal = table.Column<string>(nullable: true),
                     PermisoFuncionamientoMsp = table.Column<string>(nullable: true),
-                    HorarioId = table.Column<int>(nullable: false),
                     CantonId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -307,15 +289,32 @@ namespace SCAME.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Consultorio_Horario_HorarioId",
-                        column: x => x.HorarioId,
-                        principalTable: "Horario",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Consultorio_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Horario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Dia = table.Column<string>(nullable: true),
+                    HoraApertura = table.Column<DateTime>(nullable: false),
+                    HoraCierre = table.Column<DateTime>(nullable: false),
+                    Estado = table.Column<bool>(nullable: false),
+                    ConsultorioId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Horario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Horario_Consultorio_ConsultorioId",
+                        column: x => x.ConsultorioId,
+                        principalTable: "Consultorio",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -438,14 +437,14 @@ namespace SCAME.Migrations
                 column: "CantonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Consultorio_HorarioId",
-                table: "Consultorio",
-                column: "HorarioId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Consultorio_UserId",
                 table: "Consultorio",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Horario_ConsultorioId",
+                table: "Horario",
+                column: "ConsultorioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Provincia_PaisId",
@@ -480,19 +479,19 @@ namespace SCAME.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Consultorio");
+                name: "Especialista");
 
             migrationBuilder.DropTable(
-                name: "Especialista");
+                name: "Horario");
 
             migrationBuilder.DropTable(
                 name: "Paciente");
 
             migrationBuilder.DropTable(
-                name: "Canton");
+                name: "Consultorio");
 
             migrationBuilder.DropTable(
-                name: "Horario");
+                name: "Canton");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -27,6 +27,9 @@
                             Nombre del representante
                         </th>
                         <th>
+                            Ciudad
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Direccion)
                         </th>
                         <th>
@@ -65,6 +68,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.NombreRepresentateLegal)
                                 @Html.DisplayFor(modelItem => item.ApellidoRepresentanteLegal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Canton)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Direccion)

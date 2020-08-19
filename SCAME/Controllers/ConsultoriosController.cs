@@ -30,6 +30,7 @@ namespace SCAME.Controllers
         // GET: Consultorios
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Consultorio.ToListAsync());
         }
 
@@ -83,6 +84,7 @@ namespace SCAME.Controllers
             var user = await userManager.GetUserAsync(User);
             if (ModelState.IsValid)
             {
+                var nombreCanton = _context.Canton.Where(ca => ca.Id == CantonId).FirstOrDefault<Canton>();
                 var consultorio = new Consultorio();
                 {
                     consultorio.Ruc = Ruc;
@@ -94,6 +96,7 @@ namespace SCAME.Controllers
                     consultorio.PermisoFuncionamientoMsp = PermisoFuncionamientoMsp;
                     consultorio.NumPatenteMunicipal = NumPatenteMunicipal;
                     consultorio.CantonId = CantonId;
+                    consultorio.Canton = nombreCanton.NombreCanton;
                     consultorio.UserId = await userManager.GetUserIdAsync(user);
                     consultorio.Email = await userManager.GetEmailAsync(user);
                     consultorio.Telefono = await userManager.GetPhoneNumberAsync(user);

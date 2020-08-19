@@ -10,8 +10,8 @@ using SCAME.Data;
 namespace SCAME.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200815225648_ConsultorioHorario")]
-    partial class ConsultorioHorario
+    [Migration("20200819051131_Iniciodos")]
+    partial class Iniciodos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -310,6 +310,9 @@ namespace SCAME.Migrations
                     b.Property<string>("ApellidoRepresentanteLegal")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Canton")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CantonId")
                         .HasColumnType("int");
 
@@ -347,8 +350,6 @@ namespace SCAME.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CantonId");
 
                     b.HasIndex("UserId");
 
@@ -388,9 +389,6 @@ namespace SCAME.Migrations
 
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("HoraApertura")
                         .HasColumnType("datetime2");
@@ -590,12 +588,6 @@ namespace SCAME.Migrations
 
             modelBuilder.Entity("SCAME.Models.Consultorio", b =>
                 {
-                    b.HasOne("SCAME.Models.Canton", "Canton")
-                        .WithMany()
-                        .HasForeignKey("CantonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
