@@ -25,7 +25,8 @@ namespace SCAME.Controllers
         // GET: Especialidads
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Especialidad.ToListAsync());
+            var especialidad =  _context.Especialidad.Where(e=>e.Estado == true);
+            return View(await especialidad.ToListAsync());
         }
         [Authorize(Roles ="Administrador")]
         // GET: Especialidads/Details/5
@@ -148,7 +149,8 @@ namespace SCAME.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var especialidad = await _context.Especialidad.FindAsync(id);
-            _context.Especialidad.Remove(especialidad);
+            especialidad.Estado = false;
+            _context.Especialidad.Update(especialidad);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

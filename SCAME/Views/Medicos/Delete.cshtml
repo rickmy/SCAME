@@ -21,13 +21,7 @@
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
+            @Html.DisplayFor(model => model.Nombre) @Html.DisplayFor(model => model.Apellido)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Telefono)
@@ -54,27 +48,17 @@
             @Html.DisplayFor(model => model.TituloEgresado)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Turno)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Turno.Id)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Consultorio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Consultorio.NombreConsultorio)
+            @Html.DisplayFor(model => model.Turno.NombreTurno)
         </dd class>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ConsultorioId" />
+        <input type="hidden" class="form-check-input" asp-for="Estado" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

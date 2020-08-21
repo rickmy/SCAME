@@ -13,6 +13,8 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ConsultorioId" />
+            <input type="hidden" class="form-check-input" asp-for="Estado" /> 
             <div class="form-group">
                 <label asp-for="Cedula" class="control-label"></label>
                 <input asp-for="Cedula" class="form-control" />
@@ -47,11 +49,6 @@
                 <label asp-for="TituloEgresado" class="control-label"></label>
                 <input asp-for="TituloEgresado" class="form-control" />
                 <span asp-validation-for="TituloEgresado" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
-                </label>
             </div>
             <div class="form-group">
                 <label asp-for="TurnoId" class="control-label"></label>

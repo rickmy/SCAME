@@ -26,8 +26,20 @@ namespace SCAME.Controllers
         // GET: Medicos
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Medicos.Include(m => m.Consultorio).Include(m => m.Turno);
-            return View(await applicationDbContext.ToListAsync());
+            var user = await userManager.GetUserAsync(User);
+            List<Consultorio> consultorios = await _context.Consultorio.ToListAsync();
+            foreach (var item in consultorios)
+            {
+                if (item.UserId == user.Id)
+                {
+                    var applicationDbContext = _context.Medicos.Include(m => m.Consultorio).Include(m => m.Turno).Where(m=>m.ConsultorioId == item.IdConsultorio && m.Estado == true);
+                   
+
+                    return View(await applicationDbContext.ToListAsync());
+                }
+                return NotFound();
+            }
+            return View();
         }
 
         // GET: Medicos/Details/5
@@ -75,6 +87,7 @@ namespace SCAME.Controllers
                     {
                         var consultorio = item;
                         medico.ConsultorioId = consultorio.IdConsultorio;
+                        medico.Estado = true;
 
                         _context.Add(medico);
                         await _context.SaveChangesAsync();
@@ -82,7 +95,7 @@ namespace SCAME.Controllers
                     }
                 }
             }
-            ViewData["TurnoId"] = new SelectList(_context.Set<Turno>(), "Id", "Id", medico.TurnoId);
+            ViewData["TurnoId"] = new SelectList(_context.Set<Turno>(), "Id", "NombreTurno", medico.TurnoId);
             return View(medico);
         }
 
@@ -99,7 +112,7 @@ namespace SCAME.Controllers
             {
                 return NotFound();
             }
-            ViewData["TurnoId"] = new SelectList(_context.Set<Turno>(), "Id", "Id", medico.TurnoId);
+            ViewData["TurnoId"] = new SelectList(_context.Set<Turno>(), "Id", "NombreTurno", medico.TurnoId);
             return View(medico);
         }
 
@@ -165,7 +178,8 @@ namespace SCAME.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var medico = await _context.Medicos.FindAsync(id);
-            _context.Medicos.Remove(medico);
+            medico.Estado = false;
+            _context.Medicos.Update(medico);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -34,15 +34,9 @@
                 @Html.DisplayNameFor(model => model.TituloEgresado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Turno)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Consultorio.NombreConsultorio)
-            </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -70,13 +64,7 @@
                 @Html.DisplayFor(modelItem => item.TituloEgresado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Turno.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consultorio.NombreConsultorio)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
