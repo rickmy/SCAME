@@ -70,7 +70,7 @@
                                 @Html.DisplayFor(modelItem => item.ApellidoRepresentanteLegal)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Canton)
+                                @Html.DisplayFor(modelItem => item.Canton.NombreCanton)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Direccion)
@@ -82,15 +82,14 @@
                                 @Html.DisplayFor(modelItem => item.PermisoFuncionamientoMsp)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Email)
+                                @Html.DisplayFor(modelItem => item.User.Email)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Telefono)
+                                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                <a asp-action="Details" asp-route-id="@item.IdConsultorio">Detalles</a> |
+                                <a asp-action="Delete" asp-route-id="@item.IdConsultorio">Eliminar</a>
                             </td>
                         </tr>
                     }

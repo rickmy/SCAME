@@ -36,20 +36,24 @@
                 </label>
             </div>
             <div class="col-md-3 mb-2">
-                <p class="form-group">@Html.DisplayNameFor(model => model.Telefono)</p>
-                <label class="form-group"> @Html.DisplayFor(model => model.Telefono)</label>
+                <p class="form-group">Telefono</p>
+                <label class="form-group"> @Html.DisplayFor(model => model.User.PhoneNumber)</label>
             </div>
 
         </div>
         <div class="form-row">
             <div class="col-md-1 mb-2"></div>
             <div class="col-md-3 mb-2">
-                <p class="form-group">@Html.DisplayNameFor(model => model.Email)</p>
-                <label class="form-group">@Html.DisplayFor(model => model.Email)</label>
+                <p class="form-group">@Html.DisplayNameFor(model => model.User.Email)</p>
+                <label class="form-group">@Html.DisplayFor(model => model.User.Email)</label>
             </div>
-            <div class="col-md-6 mb-2">
+            <div class="col-md-3 mb-2">
                 <p class="form-group"> Dirección</p>
                 <label class="form-group">@Html.DisplayFor(model => model.Direccion)</label>
+            </div>
+            <div class="col-md-3 mb-2">
+                <p class="form-group">Ciudad</p>
+                <label class="form-group">@Html.DisplayFor(model => model.Canton.NombreCanton)</label>
             </div>
         </div>
         <div class="form-row">
@@ -60,7 +64,7 @@
             </div>
             <div class="col-md-5 mb-2">
                 <p class="form-group">Permiso de Funcionamiento otorgado por el MSP</p>
-                <label class="form-group">@Html.DisplayFor(model => model.PermisoFuncionamientoMsp))</label>
+                <label class="form-group">@Html.DisplayFor(model => model.PermisoFuncionamientoMsp)</label>
             </div>
         </div>
         <div class="form-row ">

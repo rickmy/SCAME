@@ -9,8 +9,8 @@ namespace SCAME.Models
         public DateTime HoraApertura { get; set; }
         public DateTime HoraCierre { get; set; }
         public bool Estado { get; set; } = true;
-
-
+        public int ConsultorioId { get; set; }
+        public Consultorio Consultorio { get; set; }
 
     }
 }

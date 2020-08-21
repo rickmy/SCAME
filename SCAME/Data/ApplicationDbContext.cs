@@ -23,13 +23,14 @@ namespace SCAME.Data
 
         public DbSet<SCAME.Models.Cita> Cita { get; set; }
 
-        public DbSet<SCAME.Models.Medico> Especialista { get; set; }
+        public DbSet<SCAME.Models.Medico> Medicos { get; set; }
 
         public DbSet<SCAME.Models.Especialidad> Especialidad { get; set; }
 
         public DbSet<SCAME.Models.Pais> Pais { get; set; }
         public DbSet<SCAME.Models.Provincia> Provincia { get; set; }
         public DbSet<SCAME.Models.Canton> Canton { get; set; }
+        public DbSet<SCAME.Models.MedicoEspecialidad> ConsultorioDetalle { get; set; }
 
     }
 }

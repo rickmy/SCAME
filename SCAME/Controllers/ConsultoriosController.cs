@@ -31,7 +31,7 @@ namespace SCAME.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _context.Consultorio.ToListAsync());
+            return View(await _context.Consultorio.Include(c=>c.Canton).Include(c=>c.User).ToListAsync());
         }
 
         // GET: Consultorios/Details/5
@@ -43,7 +43,14 @@ namespace SCAME.Controllers
             }
 
             var consultorio = await _context.Consultorio
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdConsultorio == id);
+
+            var canton = await _context.Canton.FindAsync(consultorio.CantonId);
+            var usuario = await userManager.FindByIdAsync(consultorio.UserId);
+
+            consultorio.Canton = canton;
+            consultorio.User = usuario;
+
             if (consultorio == null)
             {
                 return NotFound();
@@ -55,20 +62,7 @@ namespace SCAME.Controllers
         // GET: Consultorios/Create
         public IActionResult Create()
         {
-            List<Canton> ciudades = _context.Canton.ToList();
-            List<SelectListItem> items = ciudades.ConvertAll(d =>
-            {
-                return new SelectListItem()
-                {
-                    Text = d.NombreCanton.ToString(),
-                    Value = d.Id.ToString(),
-                    
-                    Selected = false
-                };
-
-            });
-
-            ViewBag.items = items;
+            ViewData["CantonId"] = new SelectList(_context.Set<Canton>(), "Id", "NombreCanton");
 
             return View();
         }
@@ -81,10 +75,11 @@ namespace SCAME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Required] string Ruc, string NombreConsultorio, string CedulaRepresentanteLegal, string NombreRepresentateLegal, string ApellidoRepresentanteLegal, string Direccion, string NumPatenteMunicipal, string PermisoFuncionamientoMsp, int CantonId)
         {
-            var user = await userManager.GetUserAsync(User);
+            
             if (ModelState.IsValid)
             {
-                var nombreCanton = _context.Canton.Where(ca => ca.Id == CantonId).FirstOrDefault<Canton>();
+                var user = await userManager.GetUserAsync(User);
+
                 var consultorio = new Consultorio();
                 {
                     consultorio.Ruc = Ruc;
@@ -96,10 +91,7 @@ namespace SCAME.Controllers
                     consultorio.PermisoFuncionamientoMsp = PermisoFuncionamientoMsp;
                     consultorio.NumPatenteMunicipal = NumPatenteMunicipal;
                     consultorio.CantonId = CantonId;
-                    consultorio.Canton = nombreCanton.NombreCanton;
                     consultorio.UserId = await userManager.GetUserIdAsync(user);
-                    consultorio.Email = await userManager.GetEmailAsync(user);
-                    consultorio.Telefono = await userManager.GetPhoneNumberAsync(user);
                 }
                 if(consultorio != null)
                 {
@@ -121,19 +113,30 @@ namespace SCAME.Controllers
 
         [Authorize(Roles = "Consultorio")]
         // GET: Consultorios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var consultorio = await _context.Consultorio.FindAsync(id);
-            if (consultorio == null)
+            
+            List<Consultorio> listConsultorio = await _context.Consultorio.ToListAsync();
+            foreach (var item in listConsultorio)
             {
-                return NotFound();
+                if (item.UserId == id)
+                {
+                    var consultorio = item;
+
+                    if (consultorio == null)
+                    {
+                        return NotFound();
+                    }
+                    ViewData["CantonId"] = new SelectList(_context.Set<Canton>(), "Id", "NombreCanton",consultorio.CantonId);
+
+                    return View(consultorio);
+                }
             }
-            return View(consultorio);
+            return NotFound();
         }
 
         // POST: Consultorios/Edit/5
@@ -141,13 +144,13 @@ namespace SCAME.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ruc,NombreConsultorio,CedulaRepresentanteLegal,NombreRepresentateLegal,ApellidoRepresentanteLegal,Direccion,NumPatenteMunicipal,PermisoFuncionamientoMsp")] Consultorio consultorio)
+        public async Task<IActionResult> Edit(string id, [Bind("Ruc,NombreConsultorio,CedulaRepresentanteLegal,NombreRepresentateLegal,ApellidoRepresentanteLegal,Direccion,NumPatenteMunicipal,PermisoFuncionamientoMsp,CantonId,UserId,IdConsultorio")] Consultorio consultorio)
         {
-            if (id != consultorio.Id)
+
+            if (id != consultorio.UserId)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
@@ -157,7 +160,7 @@ namespace SCAME.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConsultorioExists(consultorio.Id))
+                    if (!ConsultorioExists(consultorio.IdConsultorio))
                     {
                         return NotFound();
                     }
@@ -168,6 +171,8 @@ namespace SCAME.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CantonId"] = new SelectList(_context.Set<Canton>(), "Id", "NombreCanton", consultorio.CantonId);
+
             return View(consultorio);
         }
         [Authorize(Roles = "Administrador")]
@@ -180,7 +185,7 @@ namespace SCAME.Controllers
             }
 
             var consultorio = await _context.Consultorio
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdConsultorio == id);
             if (consultorio == null)
             {
                 return NotFound();
@@ -202,7 +207,7 @@ namespace SCAME.Controllers
 
         private bool ConsultorioExists(int id)
         {
-            return _context.Consultorio.Any(e => e.Id == id);
+            return _context.Consultorio.Any(e => e.IdConsultorio == id);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SCAME.Models
     public class Consultorio
     {
         [Key]
-        public int Id { get; set; }
+        public int IdConsultorio { get; set; }
         public string Ruc { get; set; }
         public string NombreConsultorio { get; set; }
         public string CedulaRepresentanteLegal { get; set; }
@@ -22,10 +22,8 @@ namespace SCAME.Models
         public string PermisoFuncionamientoMsp { get; set; }
         public List<Horario> Horarios { get; set; } = new List<Horario>();
         public int CantonId { get; set; }
-        public string Canton { get; set; }
+        public Canton Canton { get; set; }
         public string UserId { get; set; }
-        public string Email { get; set; }
-        public string Telefono { get; set; }
         public IdentityUser User { get; set; }
         public bool Estado { get; set; } = true;
     }
