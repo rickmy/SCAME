@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,11 +20,13 @@ namespace SCAME.Controllers
     {
         private readonly ApplicationDbContext _context;
         private UserManager<IdentityUser> userManager;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ConsultoriosController(ApplicationDbContext context, UserManager<IdentityUser> userMgr)
+        public ConsultoriosController(ApplicationDbContext context, UserManager<IdentityUser> userMgr, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             this.userManager = userMgr;
+            this._hostEnvironment = hostEnvironment;
         }
 
 
@@ -30,8 +35,10 @@ namespace SCAME.Controllers
         // GET: Consultorios
         public async Task<IActionResult> Index()
         {
+            var applicationDbContext =_context.Consultorio.Include(c => c.Canton).Include(c => c.User).Where(m => m.Estado == true);
 
-            return View(await _context.Consultorio.Include(c=>c.Canton).Include(c=>c.User).ToListAsync());
+
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Consultorios/Details/5
@@ -73,29 +80,26 @@ namespace SCAME.Controllers
         [Authorize(Roles = "Usuario, Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Required] string Ruc, string NombreConsultorio, string CedulaRepresentanteLegal, string NombreRepresentateLegal, string ApellidoRepresentanteLegal, string Direccion, string NumPatenteMunicipal, string PermisoFuncionamientoMsp, int CantonId)
+        public async Task<IActionResult> Create([Bind ("Ruc, NombreConsultorio, CedulaRepresentanteLegal, NombreRepresentateLegal, ApellidoRepresentanteLegal, Direccion, NumPatenteMunicipal,  PermisoFuncionamientoMsp,  CantonId, ImageFile")] Consultorio consultorio)
         {
             
             if (ModelState.IsValid)
             {
                 var user = await userManager.GetUserAsync(User);
+                
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(consultorio.ImageFile.FileName);
+                    string extension = Path.GetExtension(consultorio.ImageFile.FileName);
+                    consultorio.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
 
-                var consultorio = new Consultorio();
-                {
-                    consultorio.Ruc = Ruc;
-                    consultorio.NombreConsultorio = NombreConsultorio;
-                    consultorio.CedulaRepresentanteLegal = CedulaRepresentanteLegal;
-                    consultorio.NombreRepresentateLegal = NombreRepresentateLegal;
-                    consultorio.ApellidoRepresentanteLegal = ApellidoRepresentanteLegal;
-                    consultorio.Direccion = Direccion;
-                    consultorio.PermisoFuncionamientoMsp = PermisoFuncionamientoMsp;
-                    consultorio.NumPatenteMunicipal = NumPatenteMunicipal;
-                    consultorio.CantonId = CantonId;
-                    consultorio.UserId = await userManager.GetUserIdAsync(user);
-                }
-                if(consultorio != null)
-                {
-                    var userRol = await userManager.IsInRoleAsync(user, "Usuario");
+                var fileStream = new FileStream(path, FileMode.Create);
+                    await consultorio.ImageFile.CopyToAsync(fileStream);
+                
+
+                consultorio.UserId = await userManager.GetUserIdAsync(user);
+                
+                var userRol = await userManager.IsInRoleAsync(user, "Usuario");
                     if (userRol == true)
                     {
                         var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
@@ -104,7 +108,7 @@ namespace SCAME.Controllers
                         await _context.SaveChangesAsync();
                         return RedirectToAction(nameof(Index));
                     }
-                }
+                
             }
             return View();
         }
@@ -144,7 +148,7 @@ namespace SCAME.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Ruc,NombreConsultorio,CedulaRepresentanteLegal,NombreRepresentateLegal,ApellidoRepresentanteLegal,Direccion,NumPatenteMunicipal,PermisoFuncionamientoMsp,CantonId,UserId,IdConsultorio")] Consultorio consultorio)
+        public async Task<IActionResult> Edit(string id, [Bind("Ruc,NombreConsultorio,CedulaRepresentanteLegal,NombreRepresentateLegal,ApellidoRepresentanteLegal,Direccion,NumPatenteMunicipal,PermisoFuncionamientoMsp,CantonId,UserId,IdConsultorio,ImageFileNuevo, ImageName")] Consultorio consultorio)
         {
 
             if (id != consultorio.UserId)
@@ -153,22 +157,50 @@ namespace SCAME.Controllers
             }
             if (ModelState.IsValid)
             {
-                try
+                string wwwRootPath;
+                string fileName;
+                string extension;
+                string path;
+
+                if (consultorio.ImageFileNuevo != null && consultorio.ImageName != null)
                 {
-                    _context.Update(consultorio);
-                    await _context.SaveChangesAsync();
+                    var imagenPath = Path.Combine(_hostEnvironment.WebRootPath, "Image", consultorio.ImageName);
+                    if (System.IO.File.Exists(imagenPath))
+                    {
+                        System.IO.File.Delete(imagenPath);
+
+                        wwwRootPath = _hostEnvironment.WebRootPath;
+                        fileName = Path.GetFileNameWithoutExtension(consultorio.ImageFileNuevo.FileName);
+                        extension = Path.GetExtension(consultorio.ImageFileNuevo.FileName);
+                        consultorio.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        path = Path.Combine(wwwRootPath + "/Image/", fileName);
+
+                        var fileStream = new FileStream(path, FileMode.Create);
+                        await consultorio.ImageFileNuevo.CopyToAsync(fileStream);
+
+                        _context.Update(consultorio);
+                        await _context.SaveChangesAsync();
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ConsultorioExists(consultorio.IdConsultorio))
+                wwwRootPath = _hostEnvironment.WebRootPath;
+                fileName = Path.GetFileNameWithoutExtension(consultorio.ImageFileNuevo.FileName);
+                extension = Path.GetExtension(consultorio.ImageFileNuevo.FileName);
+                consultorio.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                path = Path.Combine(wwwRootPath + "/Image/", fileName);
+
+                var fileStreamUno = new FileStream(path, FileMode.Create);
+                await consultorio.ImageFileNuevo.CopyToAsync(fileStreamUno);
+
+                _context.Update(consultorio);
+                await _context.SaveChangesAsync();
+                if (!ConsultorioExists(consultorio.IdConsultorio))
                     {
                         return NotFound();
                     }
                     else
                     {
-                        throw;
+                        
                     }
-                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CantonId"] = new SelectList(_context.Set<Canton>(), "Id", "NombreCanton", consultorio.CantonId);
@@ -200,7 +232,14 @@ namespace SCAME.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var consultorio = await _context.Consultorio.FindAsync(id);
-            _context.Consultorio.Remove(consultorio);
+
+            var imagenPath = Path.Combine(_hostEnvironment.WebRootPath, "Image", consultorio.ImageName);
+            if (System.IO.File.Exists(imagenPath))
+                System.IO.File.Delete(imagenPath);
+
+            consultorio.Estado = false;
+            consultorio.ImageName = null;
+            _context.Consultorio.Update(consultorio);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

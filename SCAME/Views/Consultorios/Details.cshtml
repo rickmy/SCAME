@@ -14,6 +14,11 @@
                 <label class="form-group">@Html.DisplayFor(model => model.UserId)</label>
             </div>
             <div class="col-md-3 mb-2">
+                <p class="form-group ">Imagen</p>
+                <img src="@("/Image/" + Model.ImageName)" asp-append-version="true" width="100px" height="100px" />
+
+            </div>
+            <div class="col-md-3 mb-2">
                 <p class="form-group">@Html.DisplayNameFor(model => model.Ruc)</p>
                 <label class="form-group"> @Html.DisplayFor(model => model.Ruc)</label>
             </div>

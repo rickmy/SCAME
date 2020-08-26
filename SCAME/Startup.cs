@@ -79,14 +79,6 @@ namespace SCAME
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-
-            //app.UseMvc(routes =>
-            //{
-            //routes.MapRoute(
-            //    name:"areas",
-            //    pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
-            //)
-            //});
         }
     }
 }

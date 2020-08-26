@@ -30,7 +30,8 @@ namespace SCAME.Data
         public DbSet<SCAME.Models.Pais> Pais { get; set; }
         public DbSet<SCAME.Models.Provincia> Provincia { get; set; }
         public DbSet<SCAME.Models.Canton> Canton { get; set; }
-        public DbSet<SCAME.Models.MedicoEspecialidad> ConsultorioDetalle { get; set; }
+        public DbSet<SCAME.Models.MedicoDetalle> MedicoDetalle { get; set; }
+        public DbSet<SCAME.Models.Turno> Turno { get; set; }
 
     }
 }

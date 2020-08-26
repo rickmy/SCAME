@@ -7,24 +7,28 @@
     <div class="col-md-12 padding">
         <h1 class="h1 text-center text-strong ">Administrador de Consultorios</h1>
         <br />
-        <div class="col-md-12">
+        <div class="col-md-4">
             <table class="table table-responsive-sm table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th>
                             Id Usuario
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ImageName)
+                        </th>
                         <th scope="col">
-                            Ruc
+                            @Html.DisplayNameFor(model => model.Ruc)
                         </th>
                         <th>
-                            Consultorio
+                            @Html.DisplayNameFor(model => model.NombreConsultorio)
+
                         </th>
                         <th>
-                            Cedula del representante
+                            @Html.DisplayNameFor(model => model.CedulaRepresentanteLegal)
                         </th>
                         <th>
-                            Nombre del representante
+                            @Html.DisplayNameFor(model => model.NombreRepresentateLegal)
                         </th>
                         <th>
                             Ciudad
@@ -33,10 +37,10 @@
                             @Html.DisplayNameFor(model => model.Direccion)
                         </th>
                         <th>
-                            Patente Municipal
+                            @Html.DisplayNameFor(model => model.NumPatenteMunicipal)
                         </th>
                         <th>
-                            Permiso de funcionamiento
+                            @Html.DisplayNameFor(model => model.PermisoFuncionamientoMsp)
                         </th>
                         <th>
                             Correo
@@ -52,46 +56,49 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UserId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ruc)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreConsultorio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CedulaRepresentanteLegal)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreRepresentateLegal)
-                                @Html.DisplayFor(modelItem => item.ApellidoRepresentanteLegal)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Canton.NombreCanton)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Direccion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NumPatenteMunicipal)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PermisoFuncionamientoMsp)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.User.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
-                            </td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.IdConsultorio">Detalles</a> |
-                                <a asp-action="Delete" asp-route-id="@item.IdConsultorio">Eliminar</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserId)
+                        </td>
+                        <td>
+                            <img src="@("/Image/" + item.ImageName)" asp-append-version="true" width="100px" height="100px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ruc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreConsultorio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CedulaRepresentanteLegal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreRepresentateLegal)
+                            @Html.DisplayFor(modelItem => item.ApellidoRepresentanteLegal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Canton.NombreCanton)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumPatenteMunicipal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PermisoFuncionamientoMsp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.IdConsultorio">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdConsultorio">Eliminar</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,26 +11,26 @@ using SCAME.Models;
 
 namespace SCAME.Controllers
 {
-    public class MedicosController : Controller
+    public class TurnosController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private UserManager<IdentityUser> userManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public MedicosController(ApplicationDbContext context, UserManager<IdentityUser> userMgr)
+        public TurnosController(ApplicationDbContext context, UserManager<IdentityUser> userMng)
         {
             _context = context;
-            this.userManager = userMgr;
+            userManager = userMng;
         }
 
-        // GET: Medicos
-        public async Task<IActionResult> Index(string id)
+        // GET: Turnos
+        public async Task<IActionResult> Inicio(string id)
         {
             List<Consultorio> consultorios = await _context.Consultorio.ToListAsync();
             for (int i = 0; i < consultorios.Count; i++)
             {
                 if (consultorios[i].UserId == id)
                 {
-                    var applicationDbContext = _context.Medicos.Include(m => m.Consultorio).Where(m => m.ConsultorioId == consultorios[i].IdConsultorio && m.Estado == true);
+                    var applicationDbContext = _context.Turno.Include(t => t.Consultorio).Where(t => t.ConsultorioId == consultorios[i].IdConsultorio && t.Estado == true);
 
 
                     return View(await applicationDbContext.ToListAsync());
@@ -40,7 +39,7 @@ namespace SCAME.Controllers
             return View();
         }
 
-        // GET: Medicos/Details/5
+        // GET: Turnos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,53 +47,55 @@ namespace SCAME.Controllers
                 return NotFound();
             }
 
-            var medico = await _context.Medicos
-                .Include(m => m.Consultorio)
+            var turno = await _context.Turno
+                .Include(t => t.Consultorio)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (medico == null)
+            if (turno == null)
             {
                 return NotFound();
             }
 
-            return View(medico);
+            return View(turno);
         }
 
-        // GET: Medicos/Create
+        // GET: Turnos/Create
         public IActionResult Create()
         {
+            ViewData["ConsultorioId"] = new SelectList(_context.Consultorio, "IdConsultorio", "IdConsultorio");
             return View();
         }
 
-        // POST: Medicos/Create
+        // POST: Turnos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles ="Consultorio")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Cedula,Nombre,Apellido,Telefono,Email,CodigoSenecyt,TituloEgresado,Estado")] Medico medico)
+        public async Task<IActionResult> Create([Bind("Id,NombreTurno,DiasTurno,HoraInicio,HoraSalida,Estado")] Turno turno)
         {
             if (ModelState.IsValid)
             {
                 var user = await userManager.GetUserAsync(User);
-                List<Consultorio> listConsultorio = await _context.Consultorio.ToListAsync();
-                foreach (var item in listConsultorio)
-                {
-                    if (item.UserId == user.Id)
-                    {
-                        var consultorio = item;
-                        medico.ConsultorioId = consultorio.IdConsultorio;
-                        medico.Estado = true;
 
-                        _context.Add(medico);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                List<Consultorio> lstConsultorio = await _context.Consultorio.ToListAsync();
+                for (int i = 0; i < lstConsultorio.Count; i++)
+                {
+                    if(lstConsultorio[i].UserId == user.Id)
+                    {
+                        int idConsultorio = lstConsultorio[i].IdConsultorio;
+                        turno.ConsultorioId = idConsultorio;
+                        turno.Estado = true;
                     }
                 }
+                string idUser = user.Id;
+                _context.Add(turno);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Inicio","Turnos",new {@id=idUser });
             }
-            return View(medico);
+            ViewData["ConsultorioId"] = new SelectList(_context.Consultorio, "IdConsultorio", "IdConsultorio", turno.ConsultorioId);
+            return View(turno);
         }
 
-        // GET: Medicos/Edit/5
+        // GET: Turnos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -102,22 +103,23 @@ namespace SCAME.Controllers
                 return NotFound();
             }
 
-            var medico = await _context.Medicos.FindAsync(id);
-            if (medico == null)
+            var turno = await _context.Turno.FindAsync(id);
+            if (turno == null)
             {
                 return NotFound();
             }
-            return View(medico);
+            ViewData["ConsultorioId"] = new SelectList(_context.Consultorio, "IdConsultorio", "IdConsultorio", turno.ConsultorioId);
+            return View(turno);
         }
 
-        // POST: Medicos/Edit/5
+        // POST: Turnos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Cedula,Nombre,Apellido,Telefono,Email,CodigoSenecyt,TituloEgresado,Estado,ConsultorioId")] Medico medico)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreTurno,DiasTurno,HoraInicio,HoraSalida,Estado,ConsultorioId")] Turno turno)
         {
-            if (id != medico.Id)
+            if (id != turno.Id)
             {
                 return NotFound();
             }
@@ -126,12 +128,12 @@ namespace SCAME.Controllers
             {
                 try
                 {
-                    _context.Update(medico);
+                    _context.Update(turno);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MedicoExists(medico.Id))
+                    if (!TurnoExists(turno.Id))
                     {
                         return NotFound();
                     }
@@ -140,12 +142,13 @@ namespace SCAME.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Inicio));
             }
-            return View(medico);
+            ViewData["ConsultorioId"] = new SelectList(_context.Consultorio, "IdConsultorio", "IdConsultorio", turno.ConsultorioId);
+            return View(turno);
         }
 
-        // GET: Medicos/Delete/5
+        // GET: Turnos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,32 +156,31 @@ namespace SCAME.Controllers
                 return NotFound();
             }
 
-            var medico = await _context.Medicos
-                .Include(m => m.Consultorio)
+            var turno = await _context.Turno
+                .Include(t => t.Consultorio)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (medico == null)
+            if (turno == null)
             {
                 return NotFound();
             }
 
-            return View(medico);
+            return View(turno);
         }
 
-        // POST: Medicos/Delete/5
+        // POST: Turnos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var medico = await _context.Medicos.FindAsync(id);
-            medico.Estado = false;
-            _context.Medicos.Update(medico);
+            var turno = await _context.Turno.FindAsync(id);
+            _context.Turno.Remove(turno);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Inicio));
         }
 
-        private bool MedicoExists(int id)
+        private bool TurnoExists(int id)
         {
-            return _context.Medicos.Any(e => e.Id == id);
+            return _context.Turno.Any(e => e.Id == id);
         }
     }
 }

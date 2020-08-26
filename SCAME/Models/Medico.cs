@@ -15,8 +15,7 @@ namespace SCAME.Models
         public string CodigoSenecyt { get; set; }
         public string TituloEgresado { get; set; }
         public bool Estado { get; set; } = true;
-        public int? TurnoId { get; set; }
-        public Turno Turno { get; set; }
+        
         public int ConsultorioId { get; set; }
         public Consultorio Consultorio { get; set; }
 

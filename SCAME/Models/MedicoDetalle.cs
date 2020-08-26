@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace SCAME.Models
 {
-    public class MedicoEspecialidad
+    public class MedicoDetalle
     {
         [Key]
-        public int IdMedicoEspecialidad { get; set; }
+        public int IdMedicoDetalle { get; set; }
         public int? MedicoId { get; set; }
         public Medico Medico { get; set; }
         public int? EspecialidadId { get; set; }
         public Especialidad Especialidad { get; set; }
         public double? PrecioEspecialidad { get; set; }
         public string? DescripcionEspecialidad { get; set; }
+        public int? TurnoId { get; set; }
+        public Turno Turno { get; set; }
         public bool Estado { get; set; }
 
     }

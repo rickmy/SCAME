@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SCAME.Models.MedicoEspecialidad>
+﻿@model IEnumerable<SCAME.Models.MedicoDetalle>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,6 +25,9 @@
                 @Html.DisplayNameFor(model => model.DescripcionEspecialidad)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Turno)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th></th>
@@ -46,12 +49,15 @@
                 @Html.DisplayFor(modelItem => item.DescripcionEspecialidad)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Turno.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMedicoEspecialidad">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdMedicoEspecialidad">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdMedicoEspecialidad">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdMedicoDetalle">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdMedicoDetalle">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdMedicoDetalle">Delete</a>
             </td>
         </tr>
 }

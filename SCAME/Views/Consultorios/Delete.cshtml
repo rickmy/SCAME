@@ -10,7 +10,10 @@
         <hr />
         <div>
             <div class="form-row">
-                <div class="col-md-1 mb-2"></div>
+                <div class="col-md-1 mb-2">
+                    <p class="form-group">Imagen</p>
+                    <img src="@("/image/" + Model.ImageName)" asp-append-version="true" width="100px" height="100px" />
+                </div>
                 <div class="col-md-3 mb-2">
                     <p class="form-group">@Html.DisplayNameFor(model => model.UserId)</p>
                     <label class="form-group">@Html.DisplayFor(model => model.UserId)</label>

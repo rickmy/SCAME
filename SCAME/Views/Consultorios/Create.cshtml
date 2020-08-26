@@ -10,10 +10,15 @@
         <h4>Ingrese todo la información solicitada:</h4>
         
 
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="col-md-3 mb-3">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ImageFile" class="control-label"></label>
+                        <input asp-for="ImageFile" accept="image/*" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Ruc" class="control-label"></label>
                         <input asp-for="Ruc" class="form-control" />
