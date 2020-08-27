@@ -23,8 +23,10 @@ namespace SCAME.Controllers
         }
 
         // GET: Turnos
-        public async Task<IActionResult> Inicio(string id)
+        public async Task<IActionResult> Inicio()
         {
+            var user = await userManager.GetUserAsync(User);
+            var id = user.Id;
             List<Consultorio> consultorios = await _context.Consultorio.ToListAsync();
             for (int i = 0; i < consultorios.Count; i++)
             {

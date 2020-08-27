@@ -13,25 +13,21 @@ namespace SCAME.Data
             : base(options)
         {
         }
-        public DbSet<SCAME.Models.Paciente> Paciente { get; set; }
-        public DbSet<SCAME.Models.Consultorio> Consultorio { get; set; }
+        public DbSet<Consultorio> Consultorio { get; set; }
+        public DbSet<Cita> Cita { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Especialidad> Especialidad { get; set; }
+        public DbSet<Pais> Pais { get; set; }
+        public DbSet<Provincia> Provincia { get; set; }
+        public DbSet<Canton> Canton { get; set; }
+        public DbSet<MedicoDetalle> MedicoDetalle { get; set; }
+        public DbSet<Turno> Turno { get; set; }
+        public DbSet<Horario> Horario { get; set; }
+        public DbSet<Sexo> Sexos { get; set; }
 
         internal Task<IdentityResult> SaveChangesAsync(Consultorio consultorio)
         {
             throw new NotImplementedException();
         }
-
-        public DbSet<SCAME.Models.Cita> Cita { get; set; }
-
-        public DbSet<SCAME.Models.Medico> Medicos { get; set; }
-
-        public DbSet<SCAME.Models.Especialidad> Especialidad { get; set; }
-
-        public DbSet<SCAME.Models.Pais> Pais { get; set; }
-        public DbSet<SCAME.Models.Provincia> Provincia { get; set; }
-        public DbSet<SCAME.Models.Canton> Canton { get; set; }
-        public DbSet<SCAME.Models.MedicoDetalle> MedicoDetalle { get; set; }
-        public DbSet<SCAME.Models.Turno> Turno { get; set; }
-
     }
 }

@@ -24,8 +24,10 @@ namespace SCAME.Controllers
         }
 
         // GET: Medicos
-        public async Task<IActionResult> Index(string id)
+        public async Task<IActionResult> Index()
         {
+            var user = await userManager.GetUserAsync(User);
+            var id = user.Id;
             List<Consultorio> consultorios = await _context.Consultorio.ToListAsync();
             for (int i = 0; i < consultorios.Count; i++)
             {

@@ -22,8 +22,9 @@
     }
     @if (User.IsInRole("Consultorio"))
     {
-        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Medicos" asp-route-id="@user.Id" asp-action="Index">Medicos</a></li>
-        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Consultorios" asp-route-id="@user.Id" asp-action="Edit">Consultorio</a></li>
-        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Turnos" asp-route-id="@user.Id" asp-action="Inicio">Turnos</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Medicos" asp-action="Index">Medicos</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Consultorios" asp-action="Edit">Consultorio</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Turnos" asp-action="Inicio">Turnos</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a></li>
     }
 </ul>

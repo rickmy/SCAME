@@ -117,8 +117,10 @@ namespace SCAME.Controllers
 
         [Authorize(Roles = "Consultorio")]
         // GET: Consultorios/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit()
         {
+            var user = await userManager.GetUserAsync(User);
+            var id = user.Id;
             if (id == null)
             {
                 return NotFound();
@@ -148,9 +150,10 @@ namespace SCAME.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Ruc,NombreConsultorio,CedulaRepresentanteLegal,NombreRepresentateLegal,ApellidoRepresentanteLegal,Direccion,NumPatenteMunicipal,PermisoFuncionamientoMsp,CantonId,UserId,IdConsultorio,ImageFileNuevo, ImageName")] Consultorio consultorio)
+        public async Task<IActionResult> Edit([Bind("Ruc,NombreConsultorio,CedulaRepresentanteLegal,NombreRepresentateLegal,ApellidoRepresentanteLegal,Direccion,NumPatenteMunicipal,PermisoFuncionamientoMsp,CantonId,UserId,IdConsultorio,ImageFileNuevo, ImageName")] Consultorio consultorio)
         {
-
+            var user = await userManager.GetUserAsync(User);
+            var id = user.Id;
             if (id != consultorio.UserId)
             {
                 return NotFound();

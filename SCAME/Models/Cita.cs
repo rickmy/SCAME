@@ -17,7 +17,6 @@ namespace SCAME.Models
         public Medico Especialista { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public Paciente Paciente { get; set; }
         public string Descripcion { get; set; }
         public string NombreConsultorio { get; set; }
         public Consultorio Consultorio { get; set; }
