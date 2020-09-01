@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,13 @@ namespace SCAME.Controllers
     public class MedicoDetallesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<IdentityUser> userManager;
 
-        public MedicoDetallesController(ApplicationDbContext context)
+
+        public MedicoDetallesController(ApplicationDbContext context, UserManager<IdentityUser> userMgr)
         {
             _context = context;
+            this.userManager = userMgr;
         }
 
         // GET: MedicoDetalles
@@ -50,10 +54,15 @@ namespace SCAME.Controllers
         // GET: MedicoDetalles/Create
         public IActionResult Create()
         {
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "Id");
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Id");
-            ViewData["TurnoId"] = new SelectList(_context.Turno, "Id", "Id");
+            var user = userManager.GetUserId(User);
+
+            var consultorio = _context.Consultorio.Where(c => c.UserId == user).ToList();
+
+            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "NombreEspecialidad");
+            ViewData["MedicoId"] = new SelectList(_context.Medicos.Where(m=>m.ConsultorioId == consultorio[0].IdConsultorio), "Id", "Nombre");
+            ViewData["TurnoId"] = new SelectList(_context.Turno.Where(t=>t.ConsultorioId == consultorio[0].IdConsultorio), "Id", "NombreTurno");
             return View();
+
         }
 
         // POST: MedicoDetalles/Create

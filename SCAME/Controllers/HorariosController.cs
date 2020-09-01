@@ -9,6 +9,8 @@ using SCAME.Data;
 using SCAME.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Manage.Internal;
+using Microsoft.AspNetCore.Authentication;
 
 namespace SCAME.Controllers
 {
@@ -64,9 +66,27 @@ namespace SCAME.Controllers
         }
 
         // GET: Horarios/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["ConsultorioId"] = new SelectList(_context.Consultorio, "IdConsultorio", "IdConsultorio");
+            List<Horario> horarios = _context.Horario.ToList();
+            List<Consultorio> consultorios = _context.Consultorio.ToList();
+            var user = await userManager.GetUserAsync(User);
+            for (int i = 0; i < consultorios.Count; i++)
+            {
+                if (user.Id == consultorios[i].UserId)
+                {
+                    int consulId = consultorios[i].IdConsultorio;
+                    for (int j = 0; j < horarios.Count; j++)
+                    {
+                        if (consulId == horarios[j].ConsultorioId)
+                        {
+                            ViewData["primerizo"] = false;
+                            return View();
+                        }
+                    }
+                }
+            }
+            ViewData["primerizo"] = true;
             return View();
         }
 
@@ -79,9 +99,6 @@ namespace SCAME.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*_context.Add(horario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));*/
                 var user = await userManager.GetUserAsync(User);
                 List<Consultorio> listConsultorio = await _context.Consultorio.ToListAsync();
                 foreach (var item in listConsultorio)
@@ -102,6 +119,29 @@ namespace SCAME.Controllers
             return View(horario);
         }
 
+        public async Task<IActionResult> Create1([Bind("Id,Dia,HoraApertura,HoraCierre,Estado,ConsultorioId")] Horario horario)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.GetUserAsync(User);
+                List<Consultorio> listConsultorio = await _context.Consultorio.ToListAsync();
+                foreach (var item in listConsultorio)
+                {
+                    if (item.UserId == user.Id)
+                    {
+                        var consultorio = item;
+                        horario.ConsultorioId = consultorio.IdConsultorio;
+                        horario.Estado = true;
+
+                        _context.Add(horario);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Account", "Identity",new {@id = "Manage" });
+                    }
+                }
+            }
+            ViewData["ConsultorioId"] = new SelectList(_context.Consultorio, "IdConsultorio", "IdConsultorio", horario.ConsultorioId);
+            return View(horario);
+        }
         // GET: Horarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -192,9 +232,6 @@ namespace SCAME.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var horario = await _context.Horario.FindAsync(id);
-            /*_context.Horario.Remove(horario);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));*/
             horario.Estado = false;
             _context.Horario.Update(horario);
             await _context.SaveChangesAsync();

@@ -82,38 +82,38 @@ namespace SCAME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind ("Ruc, NombreConsultorio, CedulaRepresentanteLegal, NombreRepresentateLegal, ApellidoRepresentanteLegal, Direccion, NumPatenteMunicipal,  PermisoFuncionamientoMsp,  CantonId, ImageFile")] Consultorio consultorio)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var user = await userManager.GetUserAsync(User);
-                
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileNameWithoutExtension(consultorio.ImageFile.FileName);
-                    string extension = Path.GetExtension(consultorio.ImageFile.FileName);
-                    consultorio.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(consultorio.ImageFile.FileName);
+                string extension = Path.GetExtension(consultorio.ImageFile.FileName);
+                consultorio.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
 
                 var fileStream = new FileStream(path, FileMode.Create);
-                    await consultorio.ImageFile.CopyToAsync(fileStream);
-                
+                await consultorio.ImageFile.CopyToAsync(fileStream);
+
 
                 consultorio.UserId = await userManager.GetUserIdAsync(user);
-                
+
                 var userRol = await userManager.IsInRoleAsync(user, "Usuario");
-                    if (userRol == true)
-                    {
-                        var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
-                        var result1 = await userManager.AddToRoleAsync(user, "Consultorio");
-                        _context.Add(consultorio);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
-                    }
-                
+                if (userRol == true)
+                {
+                    var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
+                    var result1 = await userManager.AddToRoleAsync(user, "Consultorio");
+                    _context.Add(consultorio);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Create", "Horarios");
+                }
+
             }
             return View();
         }
 
-        
+
 
         [Authorize(Roles = "Consultorio")]
         // GET: Consultorios/Edit/5
@@ -125,7 +125,7 @@ namespace SCAME.Controllers
             {
                 return NotFound();
             }
-            
+
             List<Consultorio> listConsultorio = await _context.Consultorio.ToListAsync();
             foreach (var item in listConsultorio)
             {
@@ -197,13 +197,13 @@ namespace SCAME.Controllers
                 _context.Update(consultorio);
                 await _context.SaveChangesAsync();
                 if (!ConsultorioExists(consultorio.IdConsultorio))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        
-                    }
+                {
+                    return NotFound();
+                }
+                else
+                {
+
+                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CantonId"] = new SelectList(_context.Set<Canton>(), "Id", "NombreCanton", consultorio.CantonId);

@@ -23,5 +23,10 @@
     <PackageReference Include="SendGrid" Version="9.19.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\PdfPac\" />
+    <Folder Include="wwwroot\PdfCon\" />
+  </ItemGroup>
+
 
 </Project>

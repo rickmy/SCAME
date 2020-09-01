@@ -21,7 +21,7 @@ namespace SCAME.Controllers
             this.roleManager = roleManager;
             this.userManager = userMgr;
         }
-        private async Task createRolesandUsers()
+        public async Task CreateRolesandUsers()
         {
 
             bool rol = await roleManager.RoleExistsAsync("Administrador");
