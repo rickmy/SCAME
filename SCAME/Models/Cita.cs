@@ -8,17 +8,17 @@ namespace SCAME.Models
 {
     public class Cita
     {
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Dia { get; set; }
-        public Horario Horario { get; set; }
-        public string PrimerNombre { get; set; }
-        public string PrimerApellido { get; set; }
-        public Medico Especialista { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Descripcion { get; set; }
-        public string NombreConsultorio { get; set; }
+        public int IdCita { get; set; }
+        public int PacienteId { get; set; }
+        public Paciente Paciente { get; set; }
+        public DateTime FechaCita { get; set; }
+        public string MedicoId { get; set; }
+        public Medico Medico { get; set; }
+        public string MotivoCita { get; set; }
+        public string MotivoAnulacion { get; set; }
+        public int EspecialidadId { get; set; }
+        public Especialidad Especialidad { get; set; }
+        public string ConsultorioId { get; set; }
         public Consultorio Consultorio { get; set; }
 
     }
