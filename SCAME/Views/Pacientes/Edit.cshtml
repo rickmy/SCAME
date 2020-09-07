@@ -1,0 +1,123 @@
+﻿@model SCAME.Models.Paciente
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+
+@if (User.IsInRole("Paciente"))
+{
+    <h1>Edit</h1>
+
+    <h4>Paciente</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdPaciente" />
+                <input type="hidden" asp-for="PruebaCovid" value="@Model.PruebaCovid" />
+                <input type="hidden" asp-for="UserId" />
+                <input type="hidden" asp-for="CasoConfirmado" value="@Model.CasoConfirmado" />
+
+                <div class="form-group">
+                    <label asp-for="Cedula" class="control-label"></label>
+                    <input asp-for="Cedula" class="form-control" />
+                    <span asp-validation-for="Cedula" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PrimerNombre" class="control-label"></label>
+                    <input asp-for="PrimerNombre" class="form-control" />
+                    <span asp-validation-for="PrimerNombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SegundoNombre" class="control-label"></label>
+                    <input asp-for="SegundoNombre" class="form-control" />
+                    <span asp-validation-for="SegundoNombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PrimerApellido" class="control-label"></label>
+                    <input asp-for="PrimerApellido" class="form-control" />
+                    <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SegundoApellido" class="control-label"></label>
+                    <input asp-for="SegundoApellido" class="form-control" />
+                    <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Direccion" class="control-label"></label>
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PdfFileNuevo" class="control-label"></label>
+                    <input asp-for="PdfFileNuevo" accept="application/pdf,application/vnd.ms-excel" class="form-control" />
+                    <span asp-validation-for="PdfFileNuevo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumeroCarnet" class="control-label"></label>
+                    <input asp-for="NumeroCarnet" class="form-control" />
+                    <span asp-validation-for="NumeroCarnet" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Porcentaje" class="control-label"></label>
+                    <input asp-for="Porcentaje" class="form-control" />
+                    <span asp-validation-for="Porcentaje" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiscapacidadId" class="control-label"></label>
+                    <select asp-for="DiscapacidadId" class="form-control" asp-items="ViewBag.DiscapacidadId"></select>
+                    <span asp-validation-for="DiscapacidadId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CantonId" class="control-label"></label>
+                    <select asp-for="CantonId" class="form-control" asp-items="ViewBag.CantonId"></select>
+                    <span asp-validation-for="CantonId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SexoId" class="control-label"></label>
+                    <select asp-for="SexoId" class="form-control" asp-items="ViewBag.SexoId"></select>
+                    <span asp-validation-for="SexoId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+@if (User.IsInRole("Administrador"))
+{
+    <h1>Confirmar Caso</h1>
+
+    <h4>Confirme el paciente elegido si al revisar la prueba en el administrador de pacientes es positiva, ayude a los consultorios <br />
+    a saber confirmandolo como caso positivo</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CasoPositivo">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdPaciente" />
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        @Html.DisplayNameFor(model => model.CasoConfirmado)
+                    </label>
+                    <p>Si  <input class="form-check-inline" id="checkSi" asp-for="CasoConfirmado" /> </p>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

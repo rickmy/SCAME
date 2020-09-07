@@ -242,6 +242,15 @@ namespace SCAME.Controllers
 
             consultorio.Estado = false;
             consultorio.ImageName = null;
+
+            var user = await userManager.GetUserAsync(User);
+            var userRol = await userManager.IsInRoleAsync(user, "Consultorio");
+            if (userRol == true)
+            {
+                var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Consultorio");
+                var agregarRol = await userManager.AddToRoleAsync(user, "Usuario");
+
+            }
             _context.Consultorio.Update(consultorio);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

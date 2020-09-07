@@ -29,5 +29,9 @@ namespace SCAME.Data
         {
             throw new NotImplementedException();
         }
+
+        public DbSet<SCAME.Models.Paciente> Paciente { get; set; }
+
+        public DbSet<SCAME.Models.HorasAtencion> HorasAtencion { get; set; }
     }
 }

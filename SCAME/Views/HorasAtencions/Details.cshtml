@@ -1,0 +1,48 @@
+﻿@model SCAME.Models.HorasAtencion
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-center font-weight-bold">Detalles</h1>
+
+<div>
+    <h4 class="text-center font-weight-bold">HorasAtencion</h4>
+    <hr />
+    <dl class="row">
+        <dt cclass = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.HoraInicio)
+        </dd>
+        <dt cclass = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.HoraCierre)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.HoraCierre)
+        </dd>
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.Disponibilidad)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.Disponibilidad)
+        </dd>
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class = "col-sm-6 text-center"
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.TurnoId)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.TurnoId)
+        </dd>
+    </dl>
+</div>
+<div class="text-center">
+    <a asp-action="Edit" asp-route-id="@Model.IdHorasAtencion">Edit</a> |
+    <a asp-action="Index">Regresar</a>
+</div>

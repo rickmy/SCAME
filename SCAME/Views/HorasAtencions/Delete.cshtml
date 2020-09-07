@@ -1,0 +1,55 @@
+﻿@model SCAME.Models.HorasAtencion
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-center font-weight-bold">Borrar</h1>
+
+<h3 class="text-center font-weight-bold">¿Estás seguro que deseas borrarlo?</h3>
+<div>
+    <h4 class="text-center font-weight-bold">HorasAtencion</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.HoraInicio)
+        </dd>
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.HoraCierre)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.HoraCierre)
+        </dd>
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.Disponibilidad)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.Disponibilidad)
+        </dd>
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt class = "col-sm-6 text-center">
+            @Html.DisplayNameFor(model => model.TurnoId)
+        </dt>
+        <dd class = "col-sm-6 text-center">
+            @Html.DisplayFor(model => model.TurnoId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="col-md-4 center">
+        <input type="hidden" asp-for="IdHorasAtencion" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <div class="text-center">
+                <a asp-action="Index">Regresar</a>
+            </div>
+        </div>
+    </form>
+</div>

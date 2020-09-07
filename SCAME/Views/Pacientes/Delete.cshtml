@@ -1,0 +1,87 @@
+﻿@model SCAME.Models.Paciente
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Delete</h1>
+
+<h3>¿Estás seguro de Eliminar a este paciente?</h3>
+<div>
+    <h4>Paciente</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrimerNombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrimerNombre) @Html.DisplayFor(model => model.SegundoNombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrimerApellido)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrimerApellido) @Html.DisplayFor(model => model.SegundoApellido)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PruebaCovid)
+        </dt>
+        <dd class="col-sm-10">
+            <a class="icon-sli-docs" href="@("/PdfPac/" + Model.PruebaCovid)"> Prueba</a>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CasoConfirmado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CasoConfirmado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Discapacidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Discapacidad.NombreDiscapacidad)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroCarnet)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumeroCarnet)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Porcentaje)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Porcentaje)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Canton)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Canton.NombreCanton)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sexo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sexo.NombreSexo)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdPaciente" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar</a>
+    </form>
+</div>

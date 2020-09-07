@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SCAME.Models.HorasAtencion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br>
+<br>
+<h1 class="text-center font-weight-bold">Horarios de Atencion</h1>
+<div class="col-md-1">
+    <a asp-action="Create" class="text-center form-control btn btn-secondary">Añadir</a>
+</div>
+<br>
+<br>
+<table class="table table-hover">
+ <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraCierre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TurnoId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="p-3 mb-2 bg-white text-dark-hover">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraCierre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Turno.DiasTurno)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdHorasAtencion">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdHorasAtencion">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdHorasAtencion">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
