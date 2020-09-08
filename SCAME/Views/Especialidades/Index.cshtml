@@ -4,7 +4,7 @@
     ViewData["Title"] = "Especilidades";
 }
     <div class="col-md-12 padding ">
-        <h1 class="h1 text-center text-strong ">Administrador de <small>Especialidades</small></h1>
+        <h1 class="h1 text-center text-strong ">Administrador de Especialidades</h1>
         <br />
         <p>
             <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Crear Especialidad</a>
@@ -19,7 +19,11 @@
                         Nombre Especialidad
                     </th>
                     <th>
-                        Acciones
+                    </th>
+                    <th>
+                    Acciones
+                    </th>
+                       <th>
                     </th>
                 </tr>
             </thead>
@@ -34,10 +38,20 @@
                             @Html.DisplayFor(modelItem => item.NombreEspecialidad)
                         </td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-                        </td>
+             <form asp-action="Edit" asp-route-id="@item.Id">
+             <input type="submit" value="Editar"  class="btn btn-primary text-white col-md-5 mb-10" />
+              </form> 
+              </td>
+            <td>
+            <form asp-action="Details" asp-route-id="@item.Id">
+            <input type="submit" value="Detalles" class="btn btn-info text-white col-md-4 mb-8"/>
+            </form>
+            </td>
+                 <td>      
+            <form asp-action="Delete" asp-route-id="@item.Id">
+            <input type="submit" value="Eliminar" class="btn btn-danger text-white col-md-4 mb-8"/>
+            </form>
+                </td>
                     </tr>
                 }
             </tbody>

@@ -3,14 +3,15 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="col-md-12 mb-5">
 
-<h1>Index</h1>
+<h1 class="h1 text-center text-strong padding">Horarios</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+    <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Nuevo Horario</a>
+<br/>
+<br/>
+    <table class="table table-responsive-sm table-hover ">
+        <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Dia)
@@ -22,6 +23,8 @@
                 @Html.DisplayNameFor(model => model.HoraCierre)
             </th>
 
+            <th></th>
+            <th>Acciones</th>
             <th></th>
         </tr>
     </thead>
@@ -39,9 +42,13 @@
             </td>
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary text-white col-md-4 mb-8">Editar</a> 
+                 </td>
+                 <td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info text-white col-md-4 mb-8">Detalles</a> 
+                 </td>
+                <td>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger text-white col-md-4 mb-8">Borrar</a>
             </td>
         </tr>
         }

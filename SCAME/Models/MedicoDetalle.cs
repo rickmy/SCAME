@@ -18,6 +18,8 @@ namespace SCAME.Models
         public string? DescripcionEspecialidad { get; set; }
         public int? TurnoId { get; set; }
         public Turno Turno { get; set; }
+        public int? ConsultorioId { get; set; }
+        public Consultorio Consultorio { get; set; }
         public bool Estado { get; set; }
 
     }

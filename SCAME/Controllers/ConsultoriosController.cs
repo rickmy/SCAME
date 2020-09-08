@@ -260,5 +260,10 @@ namespace SCAME.Controllers
         {
             return _context.Consultorio.Any(e => e.IdConsultorio == id);
         }
+        public async Task<IActionResult> VistaComercial(int? id)
+        {
+            var applicationDbContext = _context.Consultorio.Include(c => c.Canton).Include(c => c.User).Include(c => c.Medicos).Include(c => c.Medicos.Detalle).Include(c => c.Medicos.Detalle.Especialidad).Where(m => m.Estado == true && m.IdConsultorio == id);
+            return View(await applicationDbContext.ToListAsync());
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SCAME.Models
 {
@@ -15,7 +16,7 @@ namespace SCAME.Models
         public string CodigoSenecyt { get; set; }
         public string TituloEgresado { get; set; }
         public bool Estado { get; set; } = true;
-        
+        public MedicoDetalle Detalle { get; set; }
         public int ConsultorioId { get; set; }
         public Consultorio Consultorio { get; set; }
 

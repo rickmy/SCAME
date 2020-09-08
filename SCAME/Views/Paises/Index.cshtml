@@ -4,15 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="col-md-12 padding">
+        <h1 class="h1 text-center text-strong ">País/ Provincia / Ciudad</h1>
+        <br />
 
-<p>
-    <a asp-action="Create">Crear Pais</a>
-    
-    <a asp-action="CreateCiudad">Añadir Ciudad</a>
-</p>
-<table class="table">
-    <thead>
+<table class="table table-responsive-sm table-hover">
+                <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.NombrePais)
@@ -37,8 +34,10 @@
             </td>
             <td i-Provincia="@item.Id"></td>
             <td i-Canton="@item.Id"></td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            <td> 
+                <form asp-action="Details" asp-route-id="@item.Id">
+                <input type="submit" value="Detalles" class="btn btn-info text-white col-md-4 mb-8"/>
+                 </form>
             </td>
         </tr>
         }

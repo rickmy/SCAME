@@ -7,7 +7,7 @@
 
     <h1 class="h1 text-center text-strong padding">Nómina de Medicos</h1>
 
-    <a asp-action="Create" class="btn btn-success text-white col-md-1 mb-2">Ingresar nuevo medico</a>
+    <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Ingresar nuevo medico</a>
 
     <table class="table table-responsive-sm table-hover ">
         <thead class="thead-dark">
@@ -33,7 +33,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.TituloEgresado)
                 </th>
+                <th>
+                </th>
                 <th>Acciones</th>
+                <th>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -62,10 +66,18 @@
                         @Html.DisplayFor(modelItem => item.TituloEgresado)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary text-white">Editar</a>
                     </td>
+            <td>
+            <form asp-action="Details" asp-route-id="@item.Id">
+            <input type="submit" value="Detalles" class="btn btn-info text-white"/>
+            </form>
+            </td>
+                 <td>      
+            <form asp-action="Delete" asp-route-id="@item.Id">
+            <input type="submit" value="Eliminar" class="btn btn-danger text-white"/>
+            </form>
+                </td>
                 </tr>
             }
         </tbody>

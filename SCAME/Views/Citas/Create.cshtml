@@ -1,0 +1,53 @@
+﻿@model SCAME.Models.Cita
+
+@{
+    ViewData["Title"] = "Create";
+    var id = ViewBag.ConsultorioId;
+}
+
+<h1>Create</h1>
+
+<h4>Confirme los Datos de la cita</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ConsultorioId" value=@id  />
+            <div class="form-group">
+                <label asp-for="FechaCita" class="control-label"></label>
+                <input asp-for="FechaCita" class="form-control" />
+                <span asp-validation-for="FechaCita" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicoId" class="control-label">Medico:</label>
+                <select asp-for="MedicoId" class="form-control" asp-items="ViewBag.MedicoId"></select>
+                <span asp-validation-for="MedicoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotivoCita" class="control-label"></label>
+                <input asp-for="MotivoCita" class="form-control" />
+                <span asp-validation-for="MotivoCita" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EspecialidadId" class="control-label"></label>
+                <select asp-for="EspecialidadId" class="form-control" asp-items="ViewBag.EspecialidadId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="HorasAtencionId" class="control-label"></label>
+                <select asp-for="HorasAtencionId" class="form-control" asp-items="ViewBag.HorasAtencionId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

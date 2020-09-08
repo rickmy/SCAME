@@ -4,10 +4,12 @@
     ViewData["Title"] = "Pacientes";
 }
 
-<h1>Administrador de Pacientes</h1>
+<div class="col-md-12 padding">
+        <h1 class="h1 text-center text-strong ">Administrador Pacientes</h1>
+        <br />
 
-<table class="table">
-    <thead>
+<table class="table table-responsive-sm table-hover">
+                <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Cedula)
@@ -92,11 +94,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Sexo.NombreSexo)
-            </td>
+            </td>  
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPaciente">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPaciente">Details</a> 
-            </td>
+             <form asp-action="Edit" asp-route-id="@item.IdPaciente">
+             <input type="submit" value="Editar"  class="btn btn-primary text-white" />
+              </form> 
+                <form asp-action="Details" asp-route-id="@item.IdPaciente">
+                <input type="submit" value="Detalles" class="btn btn-info text-white"/>
+                 </form>
+           </td>
         </tr>
 }
     </tbody>

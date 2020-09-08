@@ -6,15 +6,15 @@
     var user = await UserManager.GetUserAsync(User);
 }
 <ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Perfil</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Contraseña</a></li>
     @if (hasExternalLogins)
     {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">Ingreesos Externos</a></li>
     }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+    @*<li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+        <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>*@
     @if (User.IsInRole("Usuario"))
     {
         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Pacientes" asp-action="Create">Paciente</a></li>
@@ -26,5 +26,15 @@
         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Consultorios" asp-action="Edit">Consultorio</a></li>
         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Turnos" asp-action="Inicio">Turnos</a></li>
         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="HoraaAtencions" asp-action="Index">Horas Atencion</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="MedicoDetalles" asp-action="Index">Configuración</a></li>
+
+
+    }
+    @if (User.IsInRole("Paciente"))
+    {
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Pacientes" asp-action="Edit">Paciente</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Citas Historial</a></li>
+
     }
 </ul>

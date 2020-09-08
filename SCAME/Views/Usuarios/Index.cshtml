@@ -5,7 +5,7 @@
     ViewData["Title"] = "Usuarios No Verificádos";
 }
 <div class="col-md-12 padding ">
-    <h1 class="h1 text-center text-strong ">Administrador de <small>Usuarios</small></h1>
+    <h1 class="h1 text-center text-strong ">Administrador de Usuarios</h1>
     <br />
     <table class="table table-responsive-sm table-hover">
         <thead class="thead-dark">
@@ -24,6 +24,8 @@
                 </th>
                 <th>
                     Acciones
+                </th>
+                <th>
                 </th>
             </tr>
         </thead>
@@ -44,8 +46,15 @@
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    <form asp-action="Details" asp-route-id="@item.Id">
+                            <input type="submit" value="Detalles" class="btn btn-info text-white"/>
+                        </form>
+                        </td>
+                    <td>
+                          
+                            <form asp-action="Delete" asp-route-id="@item.Id">
+                            <input type="submit" value="Eliminar" class="btn btn-danger text-white" style="margin-left:10px"/>
+                        </form>
                 </td>
             </tr>
             }

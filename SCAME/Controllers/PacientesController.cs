@@ -102,8 +102,10 @@ namespace SCAME.Controllers
         }
 
         // GET: Pacientes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
+            var user = await userManager.GetUserAsync(User);
+            var id = user.Id;
             if (id == null)
             {
                 return NotFound();

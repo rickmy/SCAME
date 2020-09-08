@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SCAME.Models.Consultorio>
+<h6>
+    Imagen
+</h6>
+<img src="@("/Image/" + Model.First().ImageName)" asp-append-version="true" style="width:30px; height:30px" />
+<h6>
+    @Html.DisplayNameFor(model => model.NombreConsultorio)
+</h6>
+<h6>
+    @Html.DisplayFor(model => model.First().NombreConsultorio)
+</h6>
+<h6>
+    Contacto
+</h6>
+<h6>
+    @Html.DisplayFor(model => model.First().User.PhoneNumber)
+</h6>
+<h6>
+    Correo
+</h6>
+<h6>
+    @Html.DisplayFor(model => model.First().User.Email)
+</h6>
+<h6>
+    @Html.DisplayNameFor(model => model.Direccion)
+</h6>
+<h6>
+    @Html.DisplayFor(model => model.First().Direccion)
+</h6>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre del especialista</th>
+            <th>Especialidad</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>@Html.DisplayFor(modelItem => item.Medicos.Apellido) @Html.DisplayFor(model => item.Medicos.Nombre)</td>
+    <td>@Html.DisplayFor(modelItem => item.Medicos.Detalle.Especialidad.NombreEspecialidad)</td>
+    <td>@Html.DisplayFor(modelItem => item.Medicos.Detalle.PrecioEspecialidad) </td>
+    <td>
+        <a asp-controller="Citas" asp-action="Create" asp-route-idC="@item.IdConsultorio" asp-route-idM="@item.Medicos.Id" asp-route-idE="@item.Medicos.Detalle.EspecialidadId">Agendar Cita</a>
+    </td>
+</tr>}
+    </tbody>
+</table>
+@{ }

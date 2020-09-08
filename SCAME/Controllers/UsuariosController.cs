@@ -23,7 +23,17 @@ namespace SCAME.Controllers
 
         // GET: Usuarios con el rol usuarios unicamente
 
-        public ViewResult Index() => View(userManager.Users);
+        public async Task<IActionResult> Index()
+        {
+            List<IdentityUser> miembros = new List<IdentityUser>();
+            List<IdentityUser> noMiembros = new List<IdentityUser>();
+            foreach (IdentityUser usuario in userManager.Users)
+            {
+                var lista = await userManager.IsInRoleAsync(usuario, "Usuario") ? miembros : noMiembros; //la incognita es como un if y si es verdadera se ejecuta lo que esta alado de la incognita y de ser flaso de ejecuta lo que esta alado de los dos puntos
+                lista.Add(usuario);
+            }
+            return View(miembros);
+        }
 
         // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(string id)

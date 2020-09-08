@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace SCAME.Models
 {
     public class Cita
     {
+        [Key]
         public int IdCita { get; set; }
         public int PacienteId { get; set; }
         public Paciente Paciente { get; set; }
@@ -20,6 +22,9 @@ namespace SCAME.Models
         public Especialidad Especialidad { get; set; }
         public string ConsultorioId { get; set; }
         public Consultorio Consultorio { get; set; }
-
+        public int HorasAtencionId { get; set; }
+        public HorasAtencion HorasAtencion { get; set; }
+        public string EstadoCita { get; set; }
+        public bool  Estado { get; set; }
     }
 }

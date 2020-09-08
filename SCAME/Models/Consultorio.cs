@@ -37,6 +37,7 @@ namespace SCAME.Models
         [DisplayName("Permiso Funcionamiento MSP")]
         public string PermisoFuncionamientoMsp { get; set; }
         public List<Horario> Horarios { get; set; } = new List<Horario>();
+        public Medico Medicos { get; set; }
         public int CantonId { get; set; }
         public Canton Canton { get; set; }
         public string UserId { get; set; }
