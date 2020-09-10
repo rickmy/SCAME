@@ -1,4 +1,4 @@
-﻿@model SCAME.Models.Especialidad
+﻿@model SCAME.Models.Discapacidad
 
 @{
     ViewData["Title"] = "Editar";
@@ -7,18 +7,18 @@
 <br />
 <section id="hero" class="d-flex align-items-center">
     <div class="container">
-        <h1>Editar Especialidad</h1>
+        <h1>Editar Discapacidad</h1>
         <hr />
         <h4>
             <div class="row">
                 <div class="col-md-4">
                     <form asp-action="Edit">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="IdDiscapacidad" />
                         <div class="form-group">
-                            <label asp-for="NombreEspecialidad" class="control-label"></label>
-                            <input asp-for="NombreEspecialidad" class="form-control" />
-                            <span asp-validation-for="NombreEspecialidad" class="text-danger"></span>
+                            <label asp-for="NombreDiscapacidad" class="control-label"></label>
+                            <input asp-for="NombreDiscapacidad" class="form-control" />
+                            <span asp-validation-for="NombreDiscapacidad" class="text-danger"></span>
                         </div>
                         <input type="submit" value="Guardar" class="btn-get-started scrollto" />
                         <a asp-action="Index" class="btn-get-started scrollto">Regresar</a>

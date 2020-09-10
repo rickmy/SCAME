@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,25 +10,22 @@ using SCAME.Models;
 
 namespace SCAME.Controllers
 {
-    [Authorize(Roles = "Administrador")]
-    public class EspecialidadesController : Controller
+    public class DiscapacidadesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EspecialidadesController(ApplicationDbContext context)
+        public DiscapacidadesController(ApplicationDbContext context)
         {
             _context = context;
         }
-        [Authorize(Roles ="Administrador, Consultorio")]
 
-        // GET: Especialidads
+        // GET: Discapacidades
         public async Task<IActionResult> Index()
         {
-            var especialidad =  _context.Especialidad.Where(e=>e.Estado == true);
-            return View(await especialidad.ToListAsync());
+            return View(await _context.Discapacidad.ToListAsync());
         }
-        [Authorize(Roles ="Administrador")]
-        // GET: Especialidads/Details/5
+
+        // GET: Discapacidades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,41 +33,39 @@ namespace SCAME.Controllers
                 return NotFound();
             }
 
-            var especialidad = await _context.Especialidad
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (especialidad == null)
+            var discapacidad = await _context.Discapacidad
+                .FirstOrDefaultAsync(m => m.IdDiscapacidad == id);
+            if (discapacidad == null)
             {
                 return NotFound();
             }
 
-            return View(especialidad);
+            return View(discapacidad);
         }
-        [Authorize(Roles = "Administrador")]
 
-        // GET: Especialidads/Create
+        // GET: Discapacidades/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Especialidads/Create
+        // POST: Discapacidades/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreEspecialidad")] Especialidad especialidad)
+        public async Task<IActionResult> Create([Bind("IdDiscapacidad,NombreDiscapacidad")] Discapacidad discapacidad)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(especialidad);
+                _context.Add(discapacidad);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(especialidad);
+            return View(discapacidad);
         }
-        [Authorize(Roles = "Administrador")]
 
-        // GET: Especialidads/Edit/5
+        // GET: Discapacidades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,33 +73,36 @@ namespace SCAME.Controllers
                 return NotFound();
             }
 
-            var especialidad = await _context.Especialidad.FindAsync(id);
-            if (especialidad == null)
+            var discapacidad = await _context.Discapacidad.FindAsync(id);
+            if (discapacidad == null)
             {
                 return NotFound();
             }
-            return View(especialidad);
+            return View(discapacidad);
         }
-        [Authorize(Roles = "Administrador")]
 
-        // POST: Especialidads/Edit/5
+        // POST: Discapacidades/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("Id,NombreEspecialidad")] Especialidad especialidad)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDiscapacidad,NombreDiscapacidad")] Discapacidad discapacidad)
         {
+            if (id != discapacidad.IdDiscapacidad)
+            {
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(especialidad);
+                    _context.Update(discapacidad);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EspecialidadExists(especialidad.Id))
+                    if (!DiscapacidadExists(discapacidad.IdDiscapacidad))
                     {
                         return NotFound();
                     }
@@ -116,11 +113,10 @@ namespace SCAME.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(especialidad);
+            return View(discapacidad);
         }
-        [Authorize(Roles = "Administrador")]
 
-        // GET: Especialidads/Delete/5
+        // GET: Discapacidades/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,32 +124,30 @@ namespace SCAME.Controllers
                 return NotFound();
             }
 
-            var especialidad = await _context.Especialidad
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (especialidad == null)
+            var discapacidad = await _context.Discapacidad
+                .FirstOrDefaultAsync(m => m.IdDiscapacidad == id);
+            if (discapacidad == null)
             {
                 return NotFound();
             }
 
-            return View(especialidad);
+            return View(discapacidad);
         }
-        [Authorize(Roles = "Administrador")]
 
-        // POST: Especialidads/Delete/5
+        // POST: Discapacidades/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var especialidad = await _context.Especialidad.FindAsync(id);
-            especialidad.Estado = false;
-            _context.Especialidad.Update(especialidad);
+            var discapacidad = await _context.Discapacidad.FindAsync(id);
+            _context.Discapacidad.Remove(discapacidad);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EspecialidadExists(int id)
+        private bool DiscapacidadExists(int id)
         {
-            return _context.Especialidad.Any(e => e.Id == id);
+            return _context.Discapacidad.Any(e => e.IdDiscapacidad == id);
         }
     }
 }

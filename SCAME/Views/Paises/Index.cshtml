@@ -5,41 +5,49 @@
 }
 
 <div class="col-md-12 padding">
-        <h1 class="h1 text-center text-strong ">País/ Provincia / Ciudad</h1>
-        <br />
-
-<table class="table table-responsive-sm table-hover">
-                <thead class="thead-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombrePais)
-            </th>
-            <th>
-                Provincias
-            </th>
-            <th>
-                Ciudades
-            </th>
-            <th>
-                Acciones
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombrePais)
-            </td>
-            <td i-Provincia="@item.Id"></td>
-            <td i-Canton="@item.Id"></td>
-            <td> 
-                <form asp-action="Details" asp-route-id="@item.Id">
-                <input type="submit" value="Detalles" class="btn btn-info text-white col-md-4 mb-8"/>
-                 </form>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+    <h1 class="h1 text-center text-strong ">País/ Provincia / Ciudad</h1>
+    <br />
+    <a asp-controller="Home" asp-action="Index">Regresar</a>
+    <br />
+    <a asp-action="Create">Añadir Pais</a>
+    <table class="table table-responsive-sm table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombrePais)
+                </th>
+                <th>
+                    Provincias
+                </th>
+                <th>
+                    Ciudades
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombrePais)
+                    </td>
+                    <td i-Provincia="@item.Id"></td>
+                    <td i-Canton="@item.Id"></td>
+                    <td>
+                        <form asp-action="Details" asp-route-id="@item.Id">
+                            <input type="submit" value="Detalles" class="btn btn-info text-white col-md-4 mb-8" />
+                        </form>
+                        <form asp-action="CreateProvincia" asp-route-id="@item.Id">
+                            <input type="submit" value="Añadir Provincia" class="btn btn-info text-white col-md-4 mb-8" />
+                        </form>
+                        <form asp-action="CreateCanton" asp-route-id="@item.Id">
+                            <input type="submit" value="Añadir Ciudades" class="btn btn-info text-white col-md-4 mb-8" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

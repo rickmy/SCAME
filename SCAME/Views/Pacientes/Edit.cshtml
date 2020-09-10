@@ -9,9 +9,7 @@
 
 @if (User.IsInRole("Paciente"))
 {
-    <h1>Edit</h1>
-
-    <h4>Paciente</h4>
+    <h1>Editar Perfil de</h1><h4>Paciente</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -24,8 +22,7 @@
 
                 <div class="form-group">
                     <label asp-for="Cedula" class="control-label"></label>
-                    <input asp-for="Cedula" class="form-control" />
-                    <span asp-validation-for="Cedula" class="text-danger"></span>
+                    <input asp-for="Cedula" disabled class="form-control" />
                 </div>
                 <div class="form-group">
                     <label asp-for="PrimerNombre" class="control-label"></label>
@@ -83,39 +80,16 @@
                     <span asp-validation-for="SexoId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-}
-@if (User.IsInRole("Administrador"))
-{
-    <h1>Confirmar Caso</h1>
-
-    <h4>Confirme el paciente elegido si al revisar la prueba en el administrador de pacientes es positiva, ayude a los consultorios <br />
-    a saber confirmandolo como caso positivo</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="CasoPositivo">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="IdPaciente" />
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        @Html.DisplayNameFor(model => model.CasoConfirmado)
-                    </label>
-                    <p>Si  <input class="form-check-inline" id="checkSi" asp-for="CasoConfirmado" /> </p>
-                </div>
-                <div class="form-group">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 }
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Regresar</a>
+
 </div>
 
 @section Scripts {

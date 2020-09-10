@@ -82,33 +82,35 @@ namespace SCAME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind ("Ruc, NombreConsultorio, CedulaRepresentanteLegal, NombreRepresentateLegal, ApellidoRepresentanteLegal, Direccion, NumPatenteMunicipal,  PermisoFuncionamientoMsp,  CantonId, ImageFile")] Consultorio consultorio)
         {
-
-            if (ModelState.IsValid)
-            {
-                var user = await userManager.GetUserAsync(User);
-
-                string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(consultorio.ImageFile.FileName);
-                string extension = Path.GetExtension(consultorio.ImageFile.FileName);
-                consultorio.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-
-                var fileStream = new FileStream(path, FileMode.Create);
-                await consultorio.ImageFile.CopyToAsync(fileStream);
-
-
-                consultorio.UserId = await userManager.GetUserIdAsync(user);
-
-                var userRol = await userManager.IsInRoleAsync(user, "Usuario");
-                if (userRol == true)
+            var convertir = consultorio.CedulaRepresentanteLegal.ToString();
+            var verificada = VerificaCedula(convertir);
+            if (verificada == true) {
+                if (ModelState.IsValid)
                 {
-                    var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
-                    var result1 = await userManager.AddToRoleAsync(user, "Consultorio");
-                    _context.Add(consultorio);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Create", "Horarios");
-                }
+                    var user = await userManager.GetUserAsync(User);
 
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(consultorio.ImageFile.FileName);
+                    string extension = Path.GetExtension(consultorio.ImageFile.FileName);
+                    consultorio.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+
+                    var fileStream = new FileStream(path, FileMode.Create);
+                    await consultorio.ImageFile.CopyToAsync(fileStream);
+
+
+                    consultorio.UserId = await userManager.GetUserIdAsync(user);
+
+                    var userRol = await userManager.IsInRoleAsync(user, "Usuario");
+                    if (userRol == true)
+                    {
+                        var eliminarRol = await userManager.RemoveFromRoleAsync(user, "Usuario");
+                        var result1 = await userManager.AddToRoleAsync(user, "Consultorio");
+                        _context.Add(consultorio);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Create", "Horarios");
+                    }
+                }
             }
             return View();
         }
@@ -262,8 +264,41 @@ namespace SCAME.Controllers
         }
         public async Task<IActionResult> VistaComercial(int? id)
         {
-            var applicationDbContext = _context.Consultorio.Include(c => c.Canton).Include(c => c.User).Include(c => c.Medicos).Include(c => c.Medicos.Detalle).Include(c => c.Medicos.Detalle.Especialidad).Where(m => m.Estado == true && m.IdConsultorio == id);
+            var applicationDbContext = _context.MedicoDetalle.Include(c => c.Consultorio).Include(c => c.Consultorio.Canton).Include(c => c.Consultorio.User).Include(c => c.Medico).Include(c => c.Especialidad).Where(m => m.Consultorio.IdConsultorio == id);
             return View(await applicationDbContext.ToListAsync());
+        }
+        public static bool VerificaCedula(string vc)
+        {
+
+            if (vc.Length == 10)
+            {
+                char[] validarCedula = vc.ToCharArray();
+                int aux = 0, par = 0, impar = 0, verifi;
+                for (int i = 0; i < 9; i += 2)
+                {
+                    aux = 2 * int.Parse(validarCedula[i].ToString());
+                    if (aux > 9)
+                        aux -= 9;
+                    par += aux;
+                }
+                for (int i = 1; i < 9; i += 2)
+                {
+                    impar += int.Parse(validarCedula[i].ToString());
+                }
+
+                aux = par + impar;
+                if (aux % 10 != 0)
+                {
+                    verifi = 10 - (aux % 10);
+                }
+                else
+                    verifi = 0;
+                if (verifi == int.Parse(validarCedula[9].ToString()))
+                    return true;
+                else
+                    return false;
+            }
+            return false;
         }
     }
 }

@@ -3,76 +3,58 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Cita</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Paciente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Paciente.IdPaciente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCita)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCita)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedicoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MotivoCita)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MotivoCita)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MotivoAnulacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MotivoAnulacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Especialidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Especialidad.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsultorioId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsultorioId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HorasAtencion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HorasAtencion.IdHorasAtencion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EstadoCita)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EstadoCita)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdCita">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<br />
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <h1>Detalle de la Cita</h1>
+        <h2>
+            <br />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Paciente)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Paciente.PrimerNombre) @Html.DisplayFor(model => model.Paciente.PrimerApellido)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FechaCita)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FechaCita)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MedicoId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Medico.Nombre) @Html.DisplayFor(model => model.Medico.Apellido)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MotivoCita)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MotivoCita)
+                </dd>                
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Especialidad)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Especialidad.NombreEspecialidad)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ConsultorioId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Consultorio.NombreConsultorio)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HorasAtencion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HorasAtencion.HoraInicio) - @Html.DisplayFor(model => model.HorasAtencion.HoraCierre)
+                </dd>
+            </dl>
+            <a asp-action="Index" class="btn-get-started scrollto">Regresar</a>
+    </div>
+    </h2>
+    </div>
+</section>

@@ -10,12 +10,8 @@
         <div class="form-row">
             <div class="col-md-1 mb-2"></div>
             <div class="col-md-3 mb-2">
-                <p class="form-group ">@Html.DisplayNameFor(model => model.UserId)</p>
-                <label class="form-group">@Html.DisplayFor(model => model.UserId)</label>
-            </div>
-            <div class="col-md-3 mb-2">
                 <p class="form-group ">Imagen</p>
-                <img src="@("/Image/" + Model.ImageName)" asp-append-version="true" width="100px" height="100px" />
+                <img src="@("/Image/" + Model.ImageName)" asp-append-version="true" style=" width:40px; height:50px" />
 
             </div>
             <div class="col-md-3 mb-2">
@@ -53,12 +49,12 @@
                 <label class="form-group">@Html.DisplayFor(model => model.User.Email)</label>
             </div>
             <div class="col-md-3 mb-2">
-                <p class="form-group"> Dirección</p>
-                <label class="form-group">@Html.DisplayFor(model => model.Direccion)</label>
-            </div>
-            <div class="col-md-3 mb-2">
                 <p class="form-group">Ciudad</p>
                 <label class="form-group">@Html.DisplayFor(model => model.Canton.NombreCanton)</label>
+            </div>
+            <div class="col-md-3 mb-2">
+                <p class="form-group"> Dirección</p>
+                <label class="form-group">@Html.DisplayFor(model => model.Direccion)</label>
             </div>
         </div>
         <div class="form-row">

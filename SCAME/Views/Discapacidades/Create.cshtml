@@ -1,4 +1,4 @@
-﻿@model SCAME.Models.Especialidad
+﻿@model SCAME.Models.Discapacidad
 
 @{
     ViewData["Title"] = "Crear";
@@ -8,7 +8,7 @@
 <br />
 <section id="hero" class="d-flex align-items-center">
     <div class="container">
-        <h1>Crear Especialidad</h1>
+        <h1>Crear Discapacidad</h1>
         <h2>
             <br />
             <div class="row">
@@ -16,9 +16,9 @@
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label asp-for="NombreEspecialidad" class="control-label"></label>
-                            <input asp-for="NombreEspecialidad" class="form-control" />
-                            <span asp-validation-for="NombreEspecialidad" class="text-danger"></span>
+                            <label asp-for="NombreDiscapacidad" class="control-label"></label>
+                            <input asp-for="NombreDiscapacidad" class="form-control" />
+                            <span asp-validation-for="NombreDiscapacidad" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Crear" class="btn-get-started scrollto" />

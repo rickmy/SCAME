@@ -1,5 +1,95 @@
 /* Default Template Styles */
+#abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+h2 {
+    color: #052644;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+    width: 120%;
+    background-size: cover;
+    position: center;
+    margin-bottom: -200px;
+}
+
+    #hero .container {
+        position: center;
+    }
+
+    #hero h1 {
+        margin: 0;
+        font-size: 35px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #052644;
+    }
+
+    #hero h2 {
+        color: #080808;
+        margin: 10px 0 0 0;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    #hero .btn-get-started {
+        font-family: "Raleway", sans-serif;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: 1px;
+        display: inline-block;
+        padding: 12px 35px;
+        margin-top: 30px;
+        border-radius: 50px;
+        transition: 0.5s;
+        color: #fff;
+        background: #1977cc;
+    }
+
+        #hero .btn-get-started:hover {
+            background: #3291e6;
+        }
+
+@media (min-width: 1024px) {
+    #hero {
+        background-attachment: fixed;
+    }
+}
+
+@media (max-width: 992px) {
+    #hero {
+        margin-bottom: 0;
+        height: 100vh;
+    }
+
+        #hero .container {
+            padding-bottom: 80px;
+        }
+
+        #hero h1 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+
+        #hero h2 {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 30px;
+        }
+}
+
+@media (max-height: 500px) {
+    #hero {
+        height: auto;
+    }
+}
 /* Typography */
 body {
   background: #fff;

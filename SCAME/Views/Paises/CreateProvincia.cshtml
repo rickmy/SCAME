@@ -2,6 +2,7 @@
 @model SCAME.Models.Provincia
 @{
     ViewData["Title"] = "Provincia";
+    var idPais = ViewBag.PaisId;
 }
 
 <h1>Crear Provincia</h1>
@@ -9,22 +10,24 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateProvincia">
+        <form asp-action="CreateProvincias">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PaisId" class="form-control" value=@idPais>
             <div class="form-group">
                 <label asp-for="NombreProvincia" class="control-label"></label>
                 <input asp-for="NombreProvincia" class="form-control" />
                 <span asp-validation-for="NombreProvincia" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Paises" asp-action="Index">Regresar</a>
 </div>
 
 @section Scripts {

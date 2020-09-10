@@ -6,51 +6,49 @@
 <br>
 <br>
 <div class="col-md-12 mb-5">
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">Regresar</a>
 
-<h1 class="h1 text-center text-strong padding">Horas de Atencion</h1>
+    <h1 class="h1 text-center text-strong padding">Horas de Atencion</h1>
 
     <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Añadir</a>
-<br/>
-<br/>
+    <br />
+    <br />
     <table class="table table-responsive-sm table-hover ">
         <thead class="thead-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraCierre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TurnoId)
-            </th>
-            <th></th>
-            <th>Acciones</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody class="p-3 mb-2 bg-white text-dark-hover">
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoraInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoraCierre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Turno.DiasTurno)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdHorasAtencion" class="btn btn-primary text-white col-md-4 mb-8">Editar</a> 
-                </td>
-                 <td>
-                <a asp-action="Details" asp-route-id="@item.IdHorasAtencion" class="btn btn-info text-white col-md-4 mb-8">Detalles</a> 
-                </td>
-                <td>
-                <a asp-action="Delete" asp-route-id="@item.IdHorasAtencion" class="btn btn-danger text-white col-md-4 mb-8">Borrar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraCierre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TurnoId)
+                </th>
+                <th>Acciones</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="p-3 mb-2 bg-white text-dark-hover">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoraInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoraCierre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Turno.NombreTurno)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdHorasAtencion" class="btn btn-primary text-white col-md-5 mb-8">Editar</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.IdHorasAtencion" class="btn btn-danger text-white col-md-5 mb-8">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

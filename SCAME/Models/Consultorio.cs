@@ -15,13 +15,13 @@ namespace SCAME.Models
         [Key]
         public int IdConsultorio { get; set; }
         [Column(TypeName = "nvarchar(100)")]
-        [DisplayName("Imagen")]
+        [DisplayName("Imagen Promocional")]
         public string ImageName { get; set; }
         [NotMapped]
-        [DisplayName("Subir Archivo:")]
+        [DisplayName("Subir Imagen Promocional:")]
         public IFormFile ImageFile { get; set; }
         [NotMapped]
-        [DisplayName("Actualizar Imagen:")]
+        [DisplayName("Actualizar Imagen")]
         public IFormFile ImageFileNuevo { get; set; }
         public string Ruc { get; set; }
         [DisplayName("Nombre Consultorio")]
@@ -37,11 +37,16 @@ namespace SCAME.Models
         [DisplayName("Permiso Funcionamiento MSP")]
         public string PermisoFuncionamientoMsp { get; set; }
         public List<Horario> Horarios { get; set; } = new List<Horario>();
+        public List<Medico> Medico { get; set; }
+        [NotMapped]
         public Medico Medicos { get; set; }
         public int CantonId { get; set; }
         public Canton Canton { get; set; }
         public string UserId { get; set; }
         public IdentityUser User { get; set; }
+        public List<MedicoDetalle> MedicoDetalles { get; set; }
+        [NotMapped]
+        public MedicoDetalle MedicoDetalle { get; set; }
         public bool Estado { get; set; } = true;
     }
 }

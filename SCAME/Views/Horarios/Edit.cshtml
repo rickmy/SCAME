@@ -1,42 +1,41 @@
 ﻿@model SCAME.Models.Horario
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
-
-<h1>Edit</h1>
-
-<h4>Horario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<br>
+<div class="container">
+    <div class="abs-center">
+        <h2>Editar Horario</h2>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Dia" class="control-label"></label>
-                <input asp-for="Dia" class="form-control" />
-                <span asp-validation-for="Dia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraApertura" class="control-label"></label>
-                <input asp-for="HoraApertura" class="form-control" />
-                <span asp-validation-for="HoraApertura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraCierre" class="control-label"></label>
-                <input asp-for="HoraCierre" class="form-control" />
-                <span asp-validation-for="HoraCierre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            <h4>
+                <div class="form-row col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Dia" class="control-label"></label>
+                        <input asp-for="Dia" class="form-control" />
+                        <span asp-validation-for="Dia" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HoraApertura" class="control-label"></label>
+                        <input asp-for="HoraApertura" type="time" class="form-control" />
+                        <span asp-validation-for="HoraApertura" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HoraCierre" class="control-label"></label>
+                        <input asp-for="HoraCierre" type="time" class="form-control" />
+                        <span asp-validation-for="HoraCierre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-primary">Regresar</a>
+                    </div>
+            </h4>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

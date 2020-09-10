@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Pacientes";
 }
-
+<a asp-controller="Home" asp-action="Index">Regresar</a>
 <div class="col-md-12 padding">
         <h1 class="h1 text-center text-strong ">Administrador Pacientes</h1>
         <br />
@@ -96,13 +96,13 @@
                 @Html.DisplayFor(modelItem => item.Sexo.NombreSexo)
             </td>  
             <td>
-             <form asp-action="Edit" asp-route-id="@item.IdPaciente">
-             <input type="submit" value="Editar"  class="btn btn-primary text-white" />
-              </form> 
-                <form asp-action="Details" asp-route-id="@item.IdPaciente">
-                <input type="submit" value="Detalles" class="btn btn-info text-white"/>
-                 </form>
-           </td>
+                @if (item.CasoConfirmado == false)
+                {
+                    <form asp-action="CasoConfirmado" asp-route-id="@item.IdPaciente">
+                        <input type="submit" value="Editar" class="btn btn-primary text-white" />
+                    </form>
+                }
+            </td>
         </tr>
 }
     </tbody>

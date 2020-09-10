@@ -10,7 +10,9 @@ namespace SCAME.Models
     public class Sexo
     {
         [Key]
+        [Display(Name = "Id")]
         public int IdSexo { get; set; }
+        [Display(Name = "Sexo")]
         public string NombreSexo { get; set; }
         public bool Estado { get; set; }
     }

@@ -33,5 +33,7 @@ namespace SCAME.Data
         public DbSet<SCAME.Models.Paciente> Paciente { get; set; }
 
         public DbSet<SCAME.Models.HorasAtencion> HorasAtencion { get; set; }
+
+        public DbSet<SCAME.Models.Discapacidad> Discapacidad { get; set; }
     }
 }

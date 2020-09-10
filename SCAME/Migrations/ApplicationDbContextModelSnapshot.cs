@@ -249,10 +249,7 @@ namespace SCAME.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ConsultorioId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ConsultorioIdConsultorio")
+                    b.Property<int>("ConsultorioId")
                         .HasColumnType("int");
 
                     b.Property<int>("EspecialidadId")
@@ -270,10 +267,7 @@ namespace SCAME.Migrations
                     b.Property<int>("HorasAtencionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("MedicoId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MedicoId1")
+                    b.Property<int>("MedicoId")
                         .HasColumnType("int");
 
                     b.Property<string>("MotivoAnulacion")
@@ -287,13 +281,13 @@ namespace SCAME.Migrations
 
                     b.HasKey("IdCita");
 
-                    b.HasIndex("ConsultorioIdConsultorio");
+                    b.HasIndex("ConsultorioId");
 
                     b.HasIndex("EspecialidadId");
 
                     b.HasIndex("HorasAtencionId");
 
-                    b.HasIndex("MedicoId1");
+                    b.HasIndex("MedicoId");
 
                     b.HasIndex("PacienteId");
 
@@ -479,7 +473,8 @@ namespace SCAME.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConsultorioId");
+                    b.HasIndex("ConsultorioId")
+                        .IsUnique();
 
                     b.ToTable("Medicos");
                 });
@@ -516,9 +511,13 @@ namespace SCAME.Migrations
 
                     b.HasIndex("ConsultorioId");
 
-                    b.HasIndex("EspecialidadId");
+                    b.HasIndex("EspecialidadId")
+                        .IsUnique()
+                        .HasFilter("[EspecialidadId] IS NOT NULL");
 
-                    b.HasIndex("MedicoId");
+                    b.HasIndex("MedicoId")
+                        .IsUnique()
+                        .HasFilter("[MedicoId] IS NOT NULL");
 
                     b.HasIndex("TurnoId");
 
@@ -745,7 +744,9 @@ namespace SCAME.Migrations
                 {
                     b.HasOne("SCAME.Models.Consultorio", "Consultorio")
                         .WithMany()
-                        .HasForeignKey("ConsultorioIdConsultorio");
+                        .HasForeignKey("ConsultorioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SCAME.Models.Especialidad", "Especialidad")
                         .WithMany()
@@ -761,7 +762,9 @@ namespace SCAME.Migrations
 
                     b.HasOne("SCAME.Models.Medico", "Medico")
                         .WithMany()
-                        .HasForeignKey("MedicoId1");
+                        .HasForeignKey("MedicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SCAME.Models.Paciente", "Paciente")
                         .WithMany()
@@ -804,8 +807,8 @@ namespace SCAME.Migrations
             modelBuilder.Entity("SCAME.Models.Medico", b =>
                 {
                     b.HasOne("SCAME.Models.Consultorio", "Consultorio")
-                        .WithMany()
-                        .HasForeignKey("ConsultorioId")
+                        .WithOne("Medicos")
+                        .HasForeignKey("SCAME.Models.Medico", "ConsultorioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -817,12 +820,12 @@ namespace SCAME.Migrations
                         .HasForeignKey("ConsultorioId");
 
                     b.HasOne("SCAME.Models.Especialidad", "Especialidad")
-                        .WithMany()
-                        .HasForeignKey("EspecialidadId");
+                        .WithOne("MedicoDetalle")
+                        .HasForeignKey("SCAME.Models.MedicoDetalle", "EspecialidadId");
 
                     b.HasOne("SCAME.Models.Medico", "Medico")
-                        .WithMany()
-                        .HasForeignKey("MedicoId");
+                        .WithOne("Detalle")
+                        .HasForeignKey("SCAME.Models.MedicoDetalle", "MedicoId");
 
                     b.HasOne("SCAME.Models.Turno", "Turno")
                         .WithMany()

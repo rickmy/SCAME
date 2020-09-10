@@ -19,13 +19,16 @@
                         <input asp-for="ImageFile" accept="image/*" />
                         <span asp-validation-for="ImageFile" class="text-danger"></span>
                     </div>
+
+                </div>
+                <div class="col-md-3 mb-3">
                     <div class="form-group">
                         <label asp-for="Ruc" class="control-label"></label>
                         <input asp-for="Ruc" class="form-control" />
                         <span asp-validation-for="Ruc" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="col-md-5 mb-3">
+                <div class="col-md-3 mb-3">
                     <div class="form-group">
                         <label asp-for="NombreConsultorio" class="control-label">Nombre Consultorio</label>
                         <input asp-for="NombreConsultorio" class="form-control" />
@@ -36,7 +39,7 @@
             <div class="form-row ">
                 <div class="form-group col-md-3 mb-3">
                     <label asp-for="CedulaRepresentanteLegal" class="control-label">Cédula del representate legal</label>
-                    <input asp-for="CedulaRepresentanteLegal" class="form-control" />
+                    <input asp-for="CedulaRepresentanteLegal" type="number" class="form-control" />
                     <span asp-validation-for="CedulaRepresentanteLegal" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-4 mb-3">

@@ -7,6 +7,7 @@ namespace SCAME.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Nombre del país")]
         public string NombrePais { get; set; }
         public bool Estado { get; set; } = true;
         List<Provincia> Provincias { get; set; } = new List<Provincia>();

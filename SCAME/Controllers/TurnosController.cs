@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using SCAME.Models;
 
 namespace SCAME.Controllers
 {
+    [Authorize(Roles ="Consultorio")]
     public class TurnosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -63,7 +65,6 @@ namespace SCAME.Controllers
         // GET: Turnos/Create
         public IActionResult Create()
         {
-            ViewData["ConsultorioId"] = new SelectList(_context.Consultorio, "IdConsultorio", "IdConsultorio");
             return View();
         }
 
@@ -72,7 +73,7 @@ namespace SCAME.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreTurno,DiasTurno,HoraInicio,HoraSalida,Estado")] Turno turno)
+        public async Task<IActionResult> Create([Bind("NombreTurno,DiasTurno,HoraInicio,HoraSalida")] Turno turno)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +120,7 @@ namespace SCAME.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreTurno,DiasTurno,HoraInicio,HoraSalida,Estado,ConsultorioId")] Turno turno)
+        public async Task<IActionResult> Edit(int id, [Bind("NombreTurno,DiasTurno,HoraInicio,HoraSalida,ConsultorioId")] Turno turno)
         {
             if (id != turno.Id)
             {
@@ -130,8 +131,10 @@ namespace SCAME.Controllers
             {
                 try
                 {
+                    turno.Estado = true;
                     _context.Update(turno);
                     await _context.SaveChangesAsync();
+                    return View(nameof(Inicio));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -175,7 +178,8 @@ namespace SCAME.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var turno = await _context.Turno.FindAsync(id);
-            _context.Turno.Remove(turno);
+            turno.Estado = false;
+            _context.Turno.Update(turno);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Inicio));
         }

@@ -1,5 +1,4 @@
-﻿@model SCAME.Models.Especialidad
-
+﻿@model SCAME.Models.Discapacidad
 @{
     ViewData["Title"] = "Eliminar";
 }
@@ -8,26 +7,25 @@
 <br />
 <section id="hero" class="d-flex align-items-center">
     <div class="container">
-        <h1>Eliminar Especialidades</h1>
+        <h1>Eliminar Discapacidad</h1>
         <h3>La información que se elimine sera permanente</h3>
         <h2>
             <br />
             <dl class="row">
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.NombreEspecialidad)
+                    @Html.DisplayNameFor(model => model.NombreDiscapacidad)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.NombreEspecialidad)
+                    @Html.DisplayFor(model => model.NombreDiscapacidad)
                 </dd>
             </dl>
+
             <form asp-action="Delete">
-                <input type="hidden" asp-for="Id" />
-                <input type="submit" value="Eliminar" class="btn-get-started bg-danger" />
+                <input type="hidden" asp-for="IdDiscapacidad" />
+                <input type="submit" value="Delete" class="btn-get-started bg-danger" />
                 <a asp-action="Index" class="btn-get-started scrollto">Regresar</a>
             </form>
 
         </h2>
     </div>
 </section>
-
-

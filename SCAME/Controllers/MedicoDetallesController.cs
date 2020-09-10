@@ -26,7 +26,10 @@ namespace SCAME.Controllers
         // GET: MedicoDetalles
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.MedicoDetalle.Include(m => m.Especialidad).Include(m => m.Medico).Include(m => m.Turno);
+            var user = userManager.GetUserId(User);
+
+            var consultorio = _context.Consultorio.Where(c => c.UserId == user).ToList();
+            var applicationDbContext = _context.MedicoDetalle.Include(m => m.Especialidad).Include(m => m.Medico).Include(m => m.Turno).Where(m=>m.ConsultorioId == consultorio[0].IdConsultorio);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -72,8 +75,12 @@ namespace SCAME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdMedicoDetalle,MedicoId,EspecialidadId,PrecioEspecialidad,DescripcionEspecialidad,TurnoId,Estado")] MedicoDetalle medicoDetalle)
         {
+            var user = await userManager.GetUserAsync(User);
+            var consultorio = await _context.Consultorio.Where(c => c.UserId == user.Id).ToListAsync();
             if (ModelState.IsValid)
             {
+                medicoDetalle.ConsultorioId = consultorio[0].IdConsultorio;
+                medicoDetalle.Estado = true;
                 _context.Add(medicoDetalle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

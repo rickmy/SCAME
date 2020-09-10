@@ -6,57 +6,59 @@
 <br/>
 
 <div class="col-md-12 mb-5">
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">Regresar</a>
 
-<h1 class="h1 text-center text-strong padding">Medico Detalle</h1>
+    <h1 class="h1 text-center text-strong padding">Medico Detalle</h1>
 
     <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Nuevo</a>
-<br/>
-<br/>
+    <br />
+    <br />
     <table class="table table-responsive-sm table-hover ">
         <thead class="thead-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Medico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Especialidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioEspecialidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionEspecialidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Turno)
-            </th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Medico.Nombre) @Html.DisplayFor(modelItem => item.Medico.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especialidad.NombreEspecialidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioEspecialidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescripcionEspecialidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Turno.NombreTurno)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMedicoDetalle"class="btn btn-primary text-white ">Editar</a>
-              
-                  <a asp-action="Details" asp-route-id="@item.IdMedicoDetalle"class="btn btn-info text-white">Detalles</a> 
-               <a asp-action="Delete" asp-route-id="@item.IdMedicoDetalle"class="btn btn-danger text-white">Borrar</a>
-        </tr>
-}
-    </tbody>
-</table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Medico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Especialidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrecioEspecialidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescripcionEspecialidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Turno)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Medico.Nombre) @Html.DisplayFor(modelItem => item.Medico.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Especialidad.NombreEspecialidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecioEspecialidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionEspecialidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Turno.NombreTurno)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdMedicoDetalle" class="btn btn-primary text-white ">Editar</a>
+
+                        <a asp-action="Details" asp-route-id="@item.IdMedicoDetalle" class="btn btn-info text-white">Detalles</a>
+                        <a asp-action="Delete" asp-route-id="@item.IdMedicoDetalle" class="btn btn-danger text-white">Borrar</a>
+                </tr>
+            }
+        </tbody>
+    </table>

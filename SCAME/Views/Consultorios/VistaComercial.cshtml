@@ -1,51 +1,57 @@
-﻿@model IEnumerable<SCAME.Models.Consultorio>
-<h6>
-    Imagen
-</h6>
-<img src="@("/Image/" + Model.First().ImageName)" asp-append-version="true" style="width:30px; height:30px" />
-<h6>
-    @Html.DisplayNameFor(model => model.NombreConsultorio)
-</h6>
-<h6>
-    @Html.DisplayFor(model => model.First().NombreConsultorio)
-</h6>
-<h6>
-    Contacto
-</h6>
-<h6>
-    @Html.DisplayFor(model => model.First().User.PhoneNumber)
-</h6>
-<h6>
-    Correo
-</h6>
-<h6>
-    @Html.DisplayFor(model => model.First().User.Email)
-</h6>
-<h6>
-    @Html.DisplayNameFor(model => model.Direccion)
-</h6>
-<h6>
-    @Html.DisplayFor(model => model.First().Direccion)
-</h6>
-<table>
-    <thead>
+﻿@model IEnumerable<SCAME.Models.MedicoDetalle>
+
+@{ var modeloDetalle = this.Model.ToList();}
+<br>
+
+<div class="container">
+    <div class="col-md-12 padding ">
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <img src="@("/Image/" + modeloDetalle[0].Consultorio.ImageName)" asp-append-version="true" style=" width:250px; height:250px" class="foto1" />
+            </div>
+            <div class="col-md-8 mb-3">
+                <div class="form-group">
+                    <h3>Descripción</h3>
+                    <p>
+                        @Html.DisplayNameFor(model => model.Consultorio.NombreConsultorio): @Html.DisplayFor(model => modeloDetalle[0].Consultorio.NombreConsultorio)
+                    </p>
+                    <p>
+                        Contacto: @Html.DisplayFor(model => modeloDetalle[0].Consultorio.User.PhoneNumber)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => modeloDetalle[0].Consultorio.User.Email): @Html.DisplayFor(model => modeloDetalle[0].Consultorio.User.Email)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => modeloDetalle[0].Consultorio.Direccion): @Html.DisplayFor(model => modeloDetalle[0].Consultorio.Direccion)
+                    </p>
+                </div>
+                <div class="form-row ">
+                    <div class="form-group col-md-6 mb-3"> </div>
+                    <div class="form-group col-md-2 mb-3">
+                        <a asp-controller="Citas" asp-action="Create" asp-route-idC="@modeloDetalle[0].ConsultorioId" class="btn btn-secondary text-white ">Agendar Cita</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <table class="table table-responsive-sm table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Medico</th>
+                <th>Especialidad</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var especialidad in modeloDetalle)
+            {
         <tr>
-            <th>Nombre del especialista</th>
-            <th>Especialidad</th>
-            <th>Precio</th>
+            <td>@Html.DisplayFor(especialidadLista => especialidad.Medico.Apellido) @Html.DisplayFor(especialidadLista => especialidad.Medico.Nombre)</td>
+            <td>@Html.DisplayFor(especialidadLista => especialidad.Especialidad.NombreEspecialidad)</td>
+            <td>@Html.DisplayFor(especialidadLista => especialidad.PrecioEspecialidad)</td>
+
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-<tr>
-    <td>@Html.DisplayFor(modelItem => item.Medicos.Apellido) @Html.DisplayFor(model => item.Medicos.Nombre)</td>
-    <td>@Html.DisplayFor(modelItem => item.Medicos.Detalle.Especialidad.NombreEspecialidad)</td>
-    <td>@Html.DisplayFor(modelItem => item.Medicos.Detalle.PrecioEspecialidad) </td>
-    <td>
-        <a asp-controller="Citas" asp-action="Create" asp-route-idC="@item.IdConsultorio" asp-route-idM="@item.Medicos.Id" asp-route-idE="@item.Medicos.Detalle.EspecialidadId">Agendar Cita</a>
-    </td>
-</tr>}
-    </tbody>
-</table>
-@{ }
+    }
+        </tbody>
+    </table>

@@ -11,6 +11,7 @@ using SCAME.Models;
 
 namespace SCAME.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles ="Administrador")]
     public class PaisesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,6 +50,36 @@ namespace SCAME.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> CreateProvincia(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var pais = await _context.Pais.FindAsync(id);
+            if (pais == null)
+            {
+                return NotFound();
+            }
+            ViewData["PaisId"] = id;
+                return View();
+        }
+        public async Task<IActionResult> CreateCanton(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var pais = await _context.Pais.FindAsync(id);
+            if (pais == null)
+            {
+                return NotFound();
+            }
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincia.Where(p=>p.PaisId == id),"Id", "NombreProvincia");
+            return View();
+        }
 
         // POST: Paises/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -65,7 +96,7 @@ namespace SCAME.Controllers
             }
             return View(pais);
         }
-        public async Task<IActionResult> CreateProvincia([Required] string NombreProvincia,bool Estado, int id)
+        public async Task<IActionResult> CreateProvincias([Required] string NombreProvincia,bool Estado, int PaisId)
         {
 
             if (ModelState.IsValid)
@@ -73,7 +104,7 @@ namespace SCAME.Controllers
                 Provincia provincia = new Provincia()
                 {
                     NombreProvincia = NombreProvincia,
-                    PaisId = id,
+                    PaisId = PaisId,
                     Estado = true
                 };
                 Pais pais = new Pais();
@@ -84,13 +115,8 @@ namespace SCAME.Controllers
             }
             return View();
         }
-        public async Task<IActionResult> CreateCiudad([Required] string NombreCanton, bool Estado, int id)
+        public async Task<IActionResult> CreateCiudades([Required] string NombreCanton, bool Estado, int ProvinciaId)
         {
-            List<Pais> listPais = (from d in _context.Pais
-                                   select new Pais { Id = d.Id, NombrePais = d.NombrePais }).ToList();
-            List<Provincia> listProvincia = (from e in _context.Provincia
-                                             select new Provincia { Id = e.Id, NombreProvincia = e.NombreProvincia, PaisId = e.PaisId }).ToList(); 
-            
 
             if (ModelState.IsValid)
             {
@@ -98,7 +124,7 @@ namespace SCAME.Controllers
                 Canton canton = new Canton()
                 {
                     NombreCanton = NombreCanton,
-                    ProvinciaId = 1,
+                    ProvinciaId = ProvinciaId,
                     Estado = true
                 };
                 Provincia provincia = new Provincia();

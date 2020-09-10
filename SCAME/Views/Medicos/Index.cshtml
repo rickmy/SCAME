@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <div class="col-md-12 mb-5">
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">Regresar</a>
 
     <h1 class="h1 text-center text-strong padding">Nómina de Medicos</h1>
 
@@ -68,16 +69,16 @@
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary text-white">Editar</a>
                     </td>
-            <td>
-            <form asp-action="Details" asp-route-id="@item.Id">
-            <input type="submit" value="Detalles" class="btn btn-info text-white"/>
-            </form>
-            </td>
-                 <td>      
-            <form asp-action="Delete" asp-route-id="@item.Id">
-            <input type="submit" value="Eliminar" class="btn btn-danger text-white"/>
-            </form>
-                </td>
+                    <td>
+                        <form asp-action="Details" asp-route-id="@item.Id">
+                            <input type="submit" value="Detalles" class="btn btn-info text-white" />
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="Delete" asp-route-id="@item.Id">
+                            <input type="submit" value="Eliminar" class="btn btn-danger text-white" />
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -30,7 +30,7 @@ namespace SCAME.Controllers
             var user = await userManager.GetUserAsync(User);
             var listPaciente = await _context.Paciente.Where(p => p.UserId == user.Id).ToListAsync();
 
-            var applicationDbContext = _context.Cita.Include(c => c.Especialidad).Include(c => c.HorasAtencion).Include(c=>c.Medico).Include(c=>c.Consultorio).Include(c => c.Paciente).Where(c=>c.PacienteId == listPaciente[0].IdPaciente);
+            var applicationDbContext = _context.Cita.Include(c => c.Especialidad).Include(c => c.HorasAtencion).Include(c => c.Medico).Include(c => c.Consultorio).Include(c => c.Paciente).Where(c => c.PacienteId == listPaciente[0].IdPaciente);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -46,6 +46,8 @@ namespace SCAME.Controllers
                 .Include(c => c.Especialidad)
                 .Include(c => c.HorasAtencion)
                 .Include(c => c.Paciente)
+                .Include(c=> c.Medico)
+                .Include(c=>c.Consultorio)
                 .FirstOrDefaultAsync(m => m.IdCita == id);
             if (cita == null)
             {
@@ -56,17 +58,37 @@ namespace SCAME.Controllers
         }
 
         // GET: Citas/Create
-        public IActionResult Create(int idC, int idM,int idE)
+        public IActionResult Create(int idC, int idM, int idE)
         {
 
             var detalle = _context.MedicoDetalle.Where(d => d.ConsultorioId == idC).ToList();
             ViewData["ConsultorioId"] = idC;
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad.Where(e=>e.MedicoDetalle.IdMedicoDetalle == detalle[0].IdMedicoDetalle), "Id", "NombreEspecialidad");
-            ViewData["MedicoId"] = new SelectList(_context.Medicos.Where(m => m.ConsultorioId == idC), "Id", "Nombre");
+            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "NombreEspecialidad");
+
 
             ViewData["HorasAtencionId"] = new SelectList(_context.HorasAtencion.Where(ha => ha.Disponibilidad == true && ha.Turno.ConsultorioId == idC), "IdHorasAtencion", "HoraInicio");
-           return View();
-           
+            return View();
+
+        }
+
+        public JsonResult MedicoSelect(int IdEspecialidad)
+        {
+            List<ElementJsonIntKey> lst = new List<ElementJsonIntKey>();
+            lst = (from db in _context.Medicos
+                   where db.Detalle.EspecialidadId == IdEspecialidad
+                   select new ElementJsonIntKey
+                   {
+                       Value = db.Id,
+                       Text = db.Nombre + db.Apellido
+                   }).ToList();
+
+            return Json(lst);
+        }
+
+        public class ElementJsonIntKey
+        {
+            public int Value { get; set; }
+            public string Text { get; set; }
         }
 
         [HttpPost]
@@ -93,11 +115,6 @@ namespace SCAME.Controllers
                     await _context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
-                
-                ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "Id", cita.EspecialidadId);
-                ViewData["HorasAtencionId"] = new SelectList(_context.HorasAtencion, "IdHorasAtencion", "IdHorasAtencion", cita.HorasAtencionId);
-                ViewData["PacienteId"] = new SelectList(_context.Paciente, "IdPaciente", "IdPaciente", cita.PacienteId);
-                return View(cita);
             }
             }
             return NotFound();

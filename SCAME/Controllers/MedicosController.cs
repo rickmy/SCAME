@@ -75,21 +75,26 @@ namespace SCAME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Cedula,Nombre,Apellido,Telefono,Email,CodigoSenecyt,TituloEgresado,Estado")] Medico medico)
         {
-            if (ModelState.IsValid)
+            var convertir = medico.Cedula.ToString();
+            var verificada = VerificaCedula(convertir);
+            if (verificada == true)
             {
-                var user = await userManager.GetUserAsync(User);
-                List<Consultorio> listConsultorio = await _context.Consultorio.ToListAsync();
-                foreach (var item in listConsultorio)
+                if (ModelState.IsValid)
                 {
-                    if (item.UserId == user.Id)
+                    var user = await userManager.GetUserAsync(User);
+                    List<Consultorio> listConsultorio = await _context.Consultorio.ToListAsync();
+                    foreach (var item in listConsultorio)
                     {
-                        var consultorio = item;
-                        medico.ConsultorioId = consultorio.IdConsultorio;
-                        medico.Estado = true;
+                        if (item.UserId == user.Id)
+                        {
+                            var consultorio = item;
+                            medico.ConsultorioId = consultorio.IdConsultorio;
+                            medico.Estado = true;
 
-                        _context.Add(medico);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                            _context.Add(medico);
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
+                        }
                     }
                 }
             }
@@ -181,6 +186,39 @@ namespace SCAME.Controllers
         private bool MedicoExists(int id)
         {
             return _context.Medicos.Any(e => e.Id == id);
+        }
+        public static bool VerificaCedula(string vc)
+        {
+
+            if (vc.Length == 10)
+            {
+                char[] validarCedula = vc.ToCharArray();
+                int aux = 0, par = 0, impar = 0, verifi;
+                for (int i = 0; i < 9; i += 2)
+                {
+                    aux = 2 * int.Parse(validarCedula[i].ToString());
+                    if (aux > 9)
+                        aux -= 9;
+                    par += aux;
+                }
+                for (int i = 1; i < 9; i += 2)
+                {
+                    impar += int.Parse(validarCedula[i].ToString());
+                }
+
+                aux = par + impar;
+                if (aux % 10 != 0)
+                {
+                    verifi = 10 - (aux % 10);
+                }
+                else
+                    verifi = 0;
+                if (verifi == int.Parse(validarCedula[9].ToString()))
+                    return true;
+                else
+                    return false;
+            }
+            return false;
         }
     }
 }

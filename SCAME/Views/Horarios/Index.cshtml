@@ -4,53 +4,52 @@
     ViewData["Title"] = "Index";
 }
 <div class="col-md-12 mb-5">
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">Regresar</a>
 
-<h1 class="h1 text-center text-strong padding">Horarios</h1>
+    <h1 class="h1 text-center text-strong padding">Horarios</h1>
 
     <a asp-action="Create" class="btn btn-secondary text-white col-md-1 mb-2">Nuevo Horario</a>
-<br/>
-<br/>
+    <br />
+    <br />
     <table class="table table-responsive-sm table-hover ">
         <thead class="thead-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Dia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraApertura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraCierre)
-            </th>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraApertura)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraCierre)
+                </th>
 
-            <th></th>
-            <th>Acciones</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoraApertura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoraCierre)
-            </td>
+                <th>Acciones</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoraApertura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoraCierre)
+                    </td>
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary text-white col-md-4 mb-8">Editar</a> 
-                 </td>
-                 <td>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info text-white col-md-4 mb-8">Detalles</a> 
-                 </td>
-                <td>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger text-white col-md-4 mb-8">Borrar</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary text-white col-md-5 mb-8">Editar</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger text-white col-md-5 mb-8">Borrar</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>

@@ -1,0 +1,38 @@
+﻿@model SCAME.Models.Paciente
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Covid-19";
+}
+
+@if (User.IsInRole("Administrador"))
+{
+    <h1>Confirmar Caso</h1>
+
+    <h4>
+        Confirme el paciente elegido si al revisar la prueba en el administrador de pacientes es positiva, ayude a los consultorios <br />
+        a saber confirmandolo como caso positivo
+    </h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CasoPositivo">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdPaciente" />
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        @Html.DisplayNameFor(model => model.CasoConfirmado)
+                    </label>
+                    <p>Si  <input class="form-check-inline" id="checkSi" asp-for="CasoConfirmado" /> </p>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index">Regresar</a>
+    </div>
+}

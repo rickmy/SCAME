@@ -1,78 +1,77 @@
 ﻿@model IEnumerable<SCAME.Models.Cita>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cita";
 }
+<br>
+<br>
 
-<h1>Historial Citas</h1>
+<div class="col-md-12 mb-5">
+    <h2>Historial Citas</h2>
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">Regresar</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Paciente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCita)
-            </th>
-            <th>
-                Medico
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MotivoCita)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MotivoAnulacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Especialidad)
-            </th>
-            <th>
-                Consultorio
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HorasAtencion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstadoCita)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Paciente.PrimerNombre) @Html.DisplayFor(modelItem => item.Paciente.PrimerApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Medico.Nombre) @Html.DisplayFor(modelItem => item.Medico.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotivoCita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotivoAnulacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especialidad.NombreEspecialidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consultorio.NombreConsultorio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HorasAtencion.HoraInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstadoCita)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.IdCita">Details</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table table-responsive-sm table-hover ">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Paciente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaCita)
+                </th>
+                <th>
+                    Medico
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MotivoCita)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Especialidad)
+                </th>
+                <th>
+                    Consultorio
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorasAtencion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstadoCita)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Paciente.PrimerNombre) @Html.DisplayFor(modelItem => item.Paciente.PrimerApellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaCita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Medico.Nombre) @Html.DisplayFor(modelItem => item.Medico.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MotivoCita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Especialidad.NombreEspecialidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Consultorio.NombreConsultorio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorasAtencion.HoraInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoCita)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.IdCita" class="btn btn-info text-white">Detalles</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
