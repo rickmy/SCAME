@@ -1,48 +1,48 @@
 ﻿@model SCAME.Models.Turno
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
+<br />
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <h2>Crear Turno</h2>
+        <h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h1>Create</h1>
-
-<h4>Turno</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="NombreTurno" class="control-label"></label>
-                <input asp-for="NombreTurno" class="form-control" />
-                <span asp-validation-for="NombreTurno" class="text-danger"></span>
+                        <div class="form-group">
+                            <label asp-for="NombreTurno" class="control-label"></label>
+                            <input asp-for="NombreTurno" class="form-control" />
+                            <span asp-validation-for="NombreTurno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DiasTurno" class="control-label"></label>
+                            <input asp-for="DiasTurno" class="form-control" />
+                            <span asp-validation-for="DiasTurno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HoraInicio" class="control-label"></label>
+                            <input asp-for="HoraInicio" type="time" class="form-control" />
+                            <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HoraSalida" class="control-label"></label>
+                            <input asp-for="HoraSalida" type="time" class="form-control" />
+                            <span asp-validation-for="HoraSalida" class="text-danger"></span>
+                        </div>
+                    <div class="form-group">
+                        <input type="submit" value="Crear" class="btn-get-started scrollto" />
+                        <a asp-action="Inicio" class="btn-get-started scrollto">Regresar</a>
+                    </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DiasTurno" class="control-label"></label>
-                <input asp-for="DiasTurno" class="form-control" />
-                <span asp-validation-for="DiasTurno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraInicio" class="control-label"></label>
-                <input asp-for="HoraInicio" type="time" class="form-control" />
-                <span asp-validation-for="HoraInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraSalida" class="control-label"></label>
-                <input asp-for="HoraSalida" type="time" class="form-control" />
-                <span asp-validation-for="HoraSalida" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </h3>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

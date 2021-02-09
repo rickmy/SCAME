@@ -29,23 +29,6 @@ namespace SCAME.Controllers
             return View(await horas.ToListAsync());
         }
 
-        // GET: HorasAtencions/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var horasAtencion = await _context.HorasAtencion
-                .FirstOrDefaultAsync(m => m.IdHorasAtencion == id);
-            if (horasAtencion == null)
-            {
-                return NotFound();
-            }
-
-            return View(horasAtencion);
-        }
 
         // GET: HorasAtencions/Create
         public IActionResult Create()
@@ -80,6 +63,9 @@ namespace SCAME.Controllers
         // GET: HorasAtencions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = userManager.GetUserId(User);
+            var consultorio = _context.Consultorio.Where(m => m.UserId == user).ToList();
+
             if (id == null)
             {
                 return NotFound();
@@ -90,7 +76,7 @@ namespace SCAME.Controllers
             {
                 return NotFound();
             }
-            ViewData["HorasId"] = new SelectList(_context.Turno, "Id", "NombreTurno");
+            ViewData["HorasId"] = new SelectList(_context.Turno.Where(t=>t.ConsultorioId == consultorio[0].IdConsultorio), "Id", "NombreTurno");
             return View(horasAtencion);
         }
 
@@ -143,6 +129,7 @@ namespace SCAME.Controllers
             }
 
             var horasAtencion = await _context.HorasAtencion
+                .Include(h=>h.Turno)
                 .FirstOrDefaultAsync(m => m.IdHorasAtencion == id);
             if (horasAtencion == null)
             {

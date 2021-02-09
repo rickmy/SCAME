@@ -1,54 +1,48 @@
 ﻿@model SCAME.Models.MedicoDetalle
-
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
-
-<h1>Create</h1>
-
-<h4>MedicoDetalle</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="MedicoId" class="control-label"></label>
-                <select asp-for="MedicoId" class ="form-control" asp-items="ViewBag.MedicoId"></select>
+<br />
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <h3>Añadir Configuración a Médico</h3>
+        <h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="MedicoId" class="control-label"></label>
+                            <select asp-for="MedicoId" class="form-control" asp-items="ViewBag.MedicoId"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EspecialidadId" class="control-label"></label>
+                            <select asp-for="EspecialidadId" class="form-control" asp-items="ViewBag.EspecialidadId"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PrecioEspecialidad" class="control-label"></label>
+                            <input asp-for="PrecioEspecialidad" class="form-control" />
+                            <span asp-validation-for="PrecioEspecialidad" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DescripcionEspecialidad" class="control-label"></label>
+                            <input asp-for="DescripcionEspecialidad" class="form-control" />
+                            <span asp-validation-for="DescripcionEspecialidad" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TurnoId" class="control-label"></label>
+                            <select asp-for="TurnoId" class="form-control" asp-items="ViewBag.TurnoId"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Crear" class="btn-get-started scrollto" />
+                            <a asp-action="Index" class="btn-get-started scrollto">Regresar</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="EspecialidadId" class="control-label"></label>
-                <select asp-for="EspecialidadId" class ="form-control" asp-items="ViewBag.EspecialidadId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrecioEspecialidad" class="control-label"></label>
-                <input asp-for="PrecioEspecialidad" class="form-control" />
-                <span asp-validation-for="PrecioEspecialidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescripcionEspecialidad" class="control-label"></label>
-                <input asp-for="DescripcionEspecialidad" class="form-control" />
-                <span asp-validation-for="DescripcionEspecialidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TurnoId" class="control-label"></label>
-                <select asp-for="TurnoId" class ="form-control" asp-items="ViewBag.TurnoId"></select>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </h4>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

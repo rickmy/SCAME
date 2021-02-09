@@ -1,57 +1,53 @@
 ﻿@model SCAME.Models.MedicoDetalle
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar";
 }
+<br />
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <h1>Eliminar Configuración del Médico</h1>
+        <h3>La información que se elimine sera permanente</h3>
+        <h2>
+            <br />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Medico)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Medico.Nombre) @Html.DisplayFor(model => model.Medico.Apellido)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Especialidad)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Especialidad.NombreEspecialidad)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PrecioEspecialidad)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PrecioEspecialidad)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DescripcionEspecialidad)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DescripcionEspecialidad)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Turno)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Turno.NombreTurno)
+                </dd>
+            </dl>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdMedicoDetalle" />
+                <input type="submit" value="Eliminar" class="btn-get-started bg-danger" />
+                <a asp-action="Index" class="btn-get-started scrollto">Regresar</a>
+            </form>
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>MedicoDetalle</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medico.Id)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Especialidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Especialidad.Id)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioEspecialidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrecioEspecialidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescripcionEspecialidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescripcionEspecialidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Turno)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Turno.Id)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdMedicoDetalle" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+        </h2>
+    </div>
+</section>

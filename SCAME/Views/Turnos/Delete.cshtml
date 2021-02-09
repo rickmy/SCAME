@@ -1,45 +1,47 @@
 ﻿@model SCAME.Models.Turno
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar";
 }
+<br />
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <h1>Eliminar Turno</h1>
+        <h3>La información que se elimine sera permanente</h3>
+        <h2>
+            <br />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.NombreTurno)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.NombreTurno)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DiasTurno)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DiasTurno)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HoraInicio)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HoraInicio)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HoraSalida)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HoraSalida)
+                </dd>
+            </dl>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Eliminar" class="btn-get-started bg-danger" />
+                <a asp-action="Inicio" class="btn-get-started scrollto">Regresar</a>
+            </form>
 
-<h1>Eliminar</h1>
-
-<h3>Al eliminar este registro sera de froma permanente.</h3>
-<div>
-    <h4>Turno</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreTurno)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreTurno)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiasTurno)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiasTurno)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HoraInicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HoraInicio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HoraSalida)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HoraSalida)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index">Regresar</a>
-    </form>
-</div>
+        </h2>
+    </div>
+</section>

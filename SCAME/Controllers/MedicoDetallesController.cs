@@ -29,7 +29,7 @@ namespace SCAME.Controllers
             var user = userManager.GetUserId(User);
 
             var consultorio = _context.Consultorio.Where(c => c.UserId == user).ToList();
-            var applicationDbContext = _context.MedicoDetalle.Include(m => m.Especialidad).Include(m => m.Medico).Include(m => m.Turno).Where(m=>m.ConsultorioId == consultorio[0].IdConsultorio);
+            var applicationDbContext = _context.MedicoDetalle.Include(m => m.Especialidad).Include(m => m.Medico).Include(m => m.Turno).Where(m=>m.ConsultorioId == consultorio[0].IdConsultorio && m.Estado == true);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -94,6 +94,8 @@ namespace SCAME.Controllers
         // GET: MedicoDetalles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = await userManager.GetUserAsync(User);
+            var consultorio = await _context.Consultorio.Where(c => c.UserId == user.Id).ToListAsync();
             if (id == null)
             {
                 return NotFound();
@@ -104,9 +106,9 @@ namespace SCAME.Controllers
             {
                 return NotFound();
             }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "Id", medicoDetalle.EspecialidadId);
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Id", medicoDetalle.MedicoId);
-            ViewData["TurnoId"] = new SelectList(_context.Turno, "Id", "Id", medicoDetalle.TurnoId);
+            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "NombreEspecialidad", medicoDetalle.EspecialidadId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos.Where(m=>m.ConsultorioId == consultorio[0].IdConsultorio), "Id", "Nombre", medicoDetalle.MedicoId);
+            ViewData["TurnoId"] = new SelectList(_context.Turno.Where(m => m.ConsultorioId == consultorio[0].IdConsultorio), "Id", "NombreTurno", medicoDetalle.TurnoId);
             return View(medicoDetalle);
         }
 
@@ -117,6 +119,8 @@ namespace SCAME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdMedicoDetalle,MedicoId,EspecialidadId,PrecioEspecialidad,DescripcionEspecialidad,TurnoId,Estado")] MedicoDetalle medicoDetalle)
         {
+            var user = await userManager.GetUserAsync(User);
+            var consultorio = await _context.Consultorio.Where(c => c.UserId == user.Id).ToListAsync();
             if (id != medicoDetalle.IdMedicoDetalle)
             {
                 return NotFound();
@@ -142,9 +146,9 @@ namespace SCAME.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "Id", medicoDetalle.EspecialidadId);
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Id", medicoDetalle.MedicoId);
-            ViewData["TurnoId"] = new SelectList(_context.Turno, "Id", "Id", medicoDetalle.TurnoId);
+            ViewData["EspecialidadId"] = new SelectList(_context.Especialidad, "Id", "NombreEspecialidad", medicoDetalle.EspecialidadId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos.Where(m => m.ConsultorioId == consultorio[0].IdConsultorio), "Id", "Nombre", medicoDetalle.MedicoId);
+            ViewData["TurnoId"] = new SelectList(_context.Turno.Where(m => m.ConsultorioId == consultorio[0].IdConsultorio), "Id", "NombreTurno", medicoDetalle.TurnoId);
             return View(medicoDetalle);
         }
 
@@ -175,7 +179,8 @@ namespace SCAME.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var medicoDetalle = await _context.MedicoDetalle.FindAsync(id);
-            _context.MedicoDetalle.Remove(medicoDetalle);
+            medicoDetalle.Estado = false;
+            _context.Update(medicoDetalle);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

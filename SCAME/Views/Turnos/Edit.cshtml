@@ -1,49 +1,48 @@
 ﻿@model SCAME.Models.Turno
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
+<br />
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <h2>Editar Turno</h2>
+        <h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="ConsultorioId" />
+                        <div class="form-group">
+                            <label asp-for="NombreTurno" class="control-label"></label>
+                            <input asp-for="NombreTurno" class="form-control" />
+                            <span asp-validation-for="NombreTurno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DiasTurno" class="control-label"></label>
+                            <input asp-for="DiasTurno" class="form-control" />
+                            <span asp-validation-for="DiasTurno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HoraInicio"  class="control-label"></label>
+                            <input asp-for="HoraInicio" type="time" class="form-control" />
+                            <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HoraSalida" class="control-label"></label>
+                            <input asp-for="HoraSalida" type="time" class="form-control" />
+                            <span asp-validation-for="HoraSalida" class="text-danger"></span>
+                        </div>
+                    <input type="submit" value="Guardar" class="btn-get-started scrollto" />
+                    <a asp-action="Inicio" class="btn-get-started scrollto">Regresar</a>
+                    </form>
+                </div>
+            </div>
 
-<h1>Edit</h1>
-
-<h4>Turno</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="ConsultorioId" />
-            <div class="form-group">
-                <label asp-for="NombreTurno" class="control-label"></label>
-                <input asp-for="NombreTurno" class="form-control" />
-                <span asp-validation-for="NombreTurno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiasTurno" class="control-label"></label>
-                <input asp-for="DiasTurno" class="form-control" />
-                <span asp-validation-for="DiasTurno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraInicio" class="control-label"></label>
-                <input asp-for="HoraInicio" class="form-control" />
-                <span asp-validation-for="HoraInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraSalida" class="control-label"></label>
-                <input asp-for="HoraSalida" class="form-control" />
-                <span asp-validation-for="HoraSalida" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-            </div>
-        </form>
+        </h4>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Regresar</a>
-</div>
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

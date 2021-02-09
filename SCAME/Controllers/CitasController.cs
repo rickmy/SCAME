@@ -29,9 +29,17 @@ namespace SCAME.Controllers
         {
             var user = await userManager.GetUserAsync(User);
             var listPaciente = await _context.Paciente.Where(p => p.UserId == user.Id).ToListAsync();
+            var listConsultorio = await _context.Consultorio.Where(p => p.UserId == user.Id).ToListAsync();
 
-            var applicationDbContext = _context.Cita.Include(c => c.Especialidad).Include(c => c.HorasAtencion).Include(c => c.Medico).Include(c => c.Consultorio).Include(c => c.Paciente).Where(c => c.PacienteId == listPaciente[0].IdPaciente);
+
+            if (listPaciente.Count()>0)
+            {
+                var applicationDb = _context.Cita.Include(c => c.Especialidad).Include(c => c.HorasAtencion).Include(c => c.Medico).Include(c => c.Consultorio).Include(c => c.Paciente).Where(c => c.PacienteId == listPaciente[0].IdPaciente);
+                return View(await applicationDb.ToListAsync());
+            }
+            var applicationDbContext = _context.Cita.Include(c => c.Especialidad).Include(c => c.HorasAtencion).Include(c => c.Medico).Include(c => c.Consultorio).Include(c => c.Paciente).Where(c => c.ConsultorioId == listConsultorio[0].IdConsultorio);
             return View(await applicationDbContext.ToListAsync());
+
         }
 
         // GET: Citas/Details/5

@@ -1,80 +1,87 @@
 ﻿@model SCAME.Models.Paciente
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>Create</h1>
-
-<h4>Paciente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create"  enctype="multipart/form-data">
+<br>
+<div class="container">
+    <div class="abs-center">
+        <h4>Paciente</h4>
+        <p>Ingresa todo la informacion para poder registrate como paciente</p>
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Cedula" class="control-label"></label>
-                <input asp-for="Cedula" type="number" class="form-control" />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrimerNombre" class="control-label"></label>
-                <input asp-for="PrimerNombre" class="form-control" />
-                <span asp-validation-for="PrimerNombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SegundoNombre" class="control-label"></label>
-                <input asp-for="SegundoNombre" class="form-control" />
-                <span asp-validation-for="SegundoNombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrimerApellido" class="control-label"></label>
-                <input asp-for="PrimerApellido" class="form-control" />
-                <span asp-validation-for="PrimerApellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SegundoApellido" class="control-label"></label>
-                <input asp-for="SegundoApellido" class="form-control" />
-                <span asp-validation-for="SegundoApellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PdfFile" class="control-label"></label>
-                <input asp-for="PdfFile" accept="application/pdf,application/vnd.ms-excel" class="form-control" />
-                <span asp-validation-for="PdfFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumeroCarnet" class="control-label"></label>
-                <input asp-for="NumeroCarnet" class="form-control" />
-                <span asp-validation-for="NumeroCarnet" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Porcentaje" class="control-label"></label>
-                <input asp-for="Porcentaje" class="form-control" />
-                <span asp-validation-for="Porcentaje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiscapacidadId" class="control-label"></label>
-                <select asp-for="DiscapacidadId" class ="form-control" asp-items="ViewBag.DiscapacidadId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CantonId" class="control-label"></label>
-                <select asp-for="CantonId" class ="form-control" asp-items="ViewBag.CantonId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="SexoId" class="control-label"></label>
-                <select asp-for="SexoId" class ="form-control" asp-items="ViewBag.SexoId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Finalizar" class="btn btn-primary" />
-            </div>
+            <h4>
+                <div class="form-row col-md-12">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Cedula" class="control-label"></label>
+                        <input asp-for="Cedula" type="number" class="form-control" />
+                        <span asp-validation-for="Cedula" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PrimerNombre" class="control-label"></label>
+                        <input asp-for="PrimerNombre" class="form-control" />
+                        <span asp-validation-for="PrimerNombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="SegundoNombre" class="control-label"></label>
+                        <input asp-for="SegundoNombre" class="form-control" />
+                        <span asp-validation-for="SegundoNombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PrimerApellido" class="control-label"></label>
+                        <input asp-for="PrimerApellido" class="form-control" />
+                        <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="SegundoApellido" class="control-label"></label>
+                        <input asp-for="SegundoApellido" class="form-control" />
+                        <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Direccion" class="control-label"></label>
+                        <input asp-for="Direccion" class="form-control" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PdfFile" class="control-label"></label>
+                        <input asp-for="PdfFile" accept="application/pdf,application/vnd.ms-excel" class="form-control" />
+                        <span asp-validation-for="PdfFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="NumeroCarnet" class="control-label"></label>
+                        <input asp-for="NumeroCarnet" class="form-control" />
+                        <span asp-validation-for="NumeroCarnet" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Porcentaje" class="control-label"></label>
+                        <input asp-for="Porcentaje" class="form-control" />
+                        <span asp-validation-for="Porcentaje" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="DiscapacidadId" class="control-label"></label>
+                        <select asp-for="DiscapacidadId" class="form-control" asp-items="ViewBag.DiscapacidadId"></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="CantonId" class="control-label"></label>
+                        <select asp-for="CantonId" class="form-control" asp-items="ViewBag.CantonId"></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="SexoId" class="control-label"></label>
+                        <select asp-for="SexoId" class="form-control" asp-items="ViewBag.SexoId"></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="Finalizar" class="btn btn-primary" />
+                    </div>
+                </div>
+            </h4>
         </form>
     </div>
+    <br />
+    <br />
+
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
